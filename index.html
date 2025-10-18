@@ -134,6 +134,7 @@
       <h1>Hey, I'm <span class="accent">Dinesh Bhairoju</span></h1>
       <p class="sub">AI-first Digital Marketer & Web Developer — I design automations, websites, and SEO systems that drive measurable growth.</p>
       <a class="cta" href="#projects">See Projects ↓</a>
+     
       <div class="mode-switch">
   <button id="toggleMode" class="mini">Night 🌙</button>
   <button id="autoMode" class="mini">Auto ⟳</button>
@@ -293,5 +294,77 @@
       renderer.setSize(innerWidth, innerHeight);
     });
   </script>
-</body>
-</html>
+<script>
+// Load textures (update these paths if needed)
+const loader = new THREE.TextureLoader();
+const day = loader.load('earth_day.jpg');
+const night = loader.load('earth_night.jpg');
+
+// Main Earth
+const g = new THREE.Group();
+scene.add(g);
+
+const earth = new THREE.Mesh(
+  new THREE.SphereGeometry(2, 64, 64),
+  new THREE.MeshPhongMaterial({
+    map: day,
+    emissiveMap: night,
+    emissive: new THREE.Color(0xffffff),
+    emissiveIntensity: 1.1
+  })
+);
+earth.rotation.z = THREE.MathUtils.degToRad(23.4);
+g.add(earth);
+
+// Night overlay
+const nightOverlay = new THREE.Mesh(
+  new THREE.SphereGeometry(2.001, 64, 64),
+  new THREE.MeshBasicMaterial({
+    map: night,
+    transparent: true,
+    opacity: 0,
+    depthWrite: false
+  })
+);
+nightOverlay.renderOrder = 2;
+g.add(nightOverlay);
+
+// Buttons
+let isNight = false;
+let autoTimer = null;
+
+const btnToggle = document.getElementById('toggleMode');
+const btnAuto   = document.getElementById('autoMode');
+
+function setNight(on, instant=false){
+  isNight = on;
+  btnToggle.textContent = on ? 'Day ☀️' : 'Night 🌙';
+  const start = nightOverlay.material.opacity;
+  const target = on ? 1 : 0;
+  const dur = instant ? 0 : 600;
+  const t0 = performance.now();
+
+  function fade(t){
+    const k = dur ? Math.min(1, (t - t0)/dur) : 1;
+    nightOverlay.material.opacity = start + (target - start)*k;
+    if(k < 1) requestAnimationFrame(fade);
+  }
+  requestAnimationFrame(fade);
+}
+
+btnToggle?.addEventListener('click', ()=> setNight(!isNight));
+
+btnAuto?.addEventListener('click', ()=>{
+  if(autoTimer){
+    clearInterval(autoTimer);
+    autoTimer = null;
+    btnAuto.classList.remove('active');
+    btnAuto.textContent = 'Auto ⟳';
+  } else {
+    btnAuto.classList.add('active');
+    btnAuto.textContent = 'Auto ⏸';
+    autoTimer = setInterval(()=> setNight(!isNight), 8000);
+  }
+});
+</script>
+
