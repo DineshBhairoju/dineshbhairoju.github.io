@@ -352,5 +352,22 @@
   ]
 }
 </script>
+  <script>
+  const avatar = document.querySelector('.avatar');
+
+  // Add safety check in case avatar doesn't exist yet
+  if (avatar) {
+    document.addEventListener('mousemove', (e) => {
+      const xAxis = (window.innerWidth / 2 - e.pageX) / 50;
+      const yAxis = (window.innerHeight / 2 - e.pageY) / 50;
+      avatar.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
+    });
+
+    document.addEventListener('mouseleave', () => {
+      avatar.style.transform = 'rotateY(0deg) rotateX(0deg)';
+    });
+  }
+</script>
+
 </body>
 </html>
