@@ -212,15 +212,53 @@
   const amb = new THREE.AmbientLight(0x9999ff, 0.6);
   scene.add(dir, amb);
 
-  // Blob
-  const geo = new THREE.IcosahedronGeometry(1.5, 32);
-  const mat = new THREE.MeshStandardMaterial({ color: 0x8a63f9, roughness: 0.2, metalness: 0.45 });
-  const blob = new THREE.Mesh(geo, mat);
-  scene.add(blob);
+  // ===== Earth group (planet + clouds + thin atmosphere) =====
+const earthGroup = new THREE.Group();
+scene.add(earthGroup);
 
-  // Wobble noise
-  const base = geo.attributes.position.array.slice();
-  function wobble(t){
+const loader = new THREE.TextureLoader();
+
+// Safe loaders (if a texture is missing, we skip that map gracefully)
+const earthMap   = loader.load('/assets/earth/earth_day.jpg');
+let bumpMap = null, specMap = null, cloudsMap = null;
+try { bumpMap   = loader.load('/assets/earth/earth_bump.jpg'); } catch(e){}
+try { specMap   = loader.load('/assets/earth/earth_spec.jpg'); } catch(e){}
+try { cloudsMap = loader.load('/assets/earth/earth_clouds.png'); } catch(e){}
+
+// Planet
+const earthGeom = new THREE.SphereGeometry(1.6, 64, 64);
+const earthMat  = new THREE.MeshPhongMaterial({
+  map: earthMap,
+  bumpMap: bumpMap || null,
+  bumpScale: bumpMap ? 0.25 : 0,
+  specularMap: specMap || null,
+  specular: specMap ? new THREE.Color(0x333333) : new THREE.Color(0x111111),
+  shininess: 18
+});
+const earth = new THREE.Mesh(earthGeom, earthMat);
+earth.rotation.z = THREE.MathUtils.degToRad(23.4); // axial tilt
+earthGroup.add(earth);
+
+// Clouds (slightly larger sphere)
+if (cloudsMap) {
+  const cloudsGeom = new THREE.SphereGeometry(1.62, 64, 64);
+  const cloudsMat  = new THREE.MeshLambertMaterial({
+    map: cloudsMap, transparent: true, opacity: 0.4, depthWrite: false
+  });
+  const clouds = new THREE.Mesh(cloudsGeom, cloudsMat);
+  clouds.name = 'clouds';
+  earthGroup.add(clouds);
+}
+
+// Simple atmospheric glow (inside-out sphere + additive)
+const atmGeom = new THREE.SphereGeometry(1.68, 64, 64);
+const atmMat  = new THREE.MeshBasicMaterial({
+  color: 0x6f5bff, transparent: true, opacity: 0.12,
+  side: THREE.BackSide, blending: THREE.AdditiveBlending
+});
+const atmosphere = new THREE.Mesh(atmGeom, atmMat);
+earthGroup.add(atmosphere);
+
     const a = geo.attributes.position;
     for(let i=0;i<a.count;i++){
       const ix=i*3, iy=ix+1, iz=ix+2;
@@ -249,22 +287,31 @@
   addEventListener('pointermove', e=>{ mx=(e.clientX/innerWidth-0.5)*2; my=(e.clientY/innerHeight-0.5)*2; });
 
   // Loop
-  let t=0;
-  function tick(){
-    t += 0.01;
-    wobble(t);
-    blob.rotation.y += 0.004;
-    blob.rotation.x = Math.sin(t*0.5)*0.15;
+  let t = 0;
+function tick(){
+  t += 0.01;
 
-    tx += (mx - tx)*0.04; ty += (my - ty)*0.04;
-    camera.position.x = tx*0.8; camera.position.y = -ty*0.6;
-    camera.lookAt(0,0,0);
+  // Spin the Earth gently
+  earth.rotation.y += 0.0008;
 
-    stars.rotation.y += 0.0008;
-    renderer.render(scene, camera);
-    requestAnimationFrame(tick);
-  }
-  tick();
+  // Spin clouds a touch faster (if present)
+  const clouds = earthGroup.getObjectByName('clouds');
+  if (clouds) clouds.rotation.y += 0.001;
+
+  // Keep your existing parallax & stars
+  tx += (mx - tx) * 0.04;
+  ty += (my - ty) * 0.04;
+  camera.position.x = tx * 0.8;
+  camera.position.y = -ty * 0.6;
+  camera.lookAt(0, 0, 0);
+
+  stars.rotation.y += 0.0008;
+
+  renderer.render(scene, camera);
+  requestAnimationFrame(tick);
+}
+tick();
+
 
   addEventListener('resize', ()=>{
     camera.aspect = innerWidth/innerHeight; camera.updateProjectionMatrix();
