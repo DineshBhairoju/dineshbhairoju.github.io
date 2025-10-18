@@ -2,235 +2,289 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dinesh Bhairoju – 3D Portfolio</title>
-  <meta name="description" content="AI-first Digital Marketer & Web Developer. 3D portfolio with automation, SEO, and modern web builds." />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dinesh Bhairoju — AI-first Marketer & Web Developer</title>
+  <meta name="description" content="Dinesh Bhairoju — AI-first Digital Marketer & Web Developer. Automations, SEO, and modern websites that drive measurable growth." />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    html, body {
-      height: 100%;
-      background: radial-gradient(ellipse at top, #0c0024, #000);
-      overflow: hidden;
-      font-family: 'Poppins', sans-serif;
-      color: #fff;
+    :root{
+      --accent:#8a63f9;
+      --accent2:#9b5dff;
+      --bg:#000;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; color:#fff; background:#000; font-family:Poppins,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu;
+      overflow-x:hidden;
+      padding-top:72px; /* space for fixed header */
     }
 
-    header {
-      position: fixed;
-      top: 0;
-      width: 100%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 20px 50px;
-      background: rgba(0,0,0,0.4);
-      backdrop-filter: blur(10px);
-      z-index: 10;
+    /* ========== Header / Nav ========== */
+    header{
+      position:fixed; top:0; left:0; right:0; height:72px;
+      display:flex; align-items:center; justify-content:space-between;
+      padding:0 28px; z-index:20;
+      background:rgba(0,0,0,.45); backdrop-filter:blur(12px);
+      border-bottom:1px solid rgba(255,255,255,.06);
     }
-    .brand {
-      font-weight: 800;
-      font-size: 22px;
-      letter-spacing: .5px;
-      white-space: nowrap;
+    .brand{font-weight:800; font-size:22px; white-space:nowrap}
+    .brand span{color:var(--accent)}
+    nav a{
+      color:#fff; text-decoration:none; margin-left:24px; font-weight:500;
+      opacity:.9; transition:.2s;
     }
-    .brand span {
-      color: #8a63f9;
-    }
-    nav a {
-      color: #fff;
-      text-decoration: none;
-      margin-left: 25px;
-      font-weight: 500;
-    }
-    nav a:hover {
-      color: #8a63f9;
+    nav a:hover{color:var(--accent)}
+
+    /* ========== Canvas (3D behind) ========== */
+    canvas#bg{
+      position:fixed; inset:0; width:100%; height:100%; z-index:-1; display:block;
+      background:radial-gradient(ellipse at 50% -20%, #0b0226 0%, #000 60%);
     }
 
-    canvas { display: block; }
+    /* ========== Hero ========== */
+    section.hero{
+      min-height:72vh; display:grid; place-items:center; text-align:center; position:relative; z-index:10;
+      padding:40px 18px;
+    }
+    .avatar{
+      width:128px; height:128px; object-fit:cover; border-radius:50%;
+      border:3px solid rgba(255,255,255,.25);
+      box-shadow:0 0 26px rgba(155,93,255,.45);
+      margin-bottom:20px;
+    }
+    h1{margin:10px 0 12px; font-size:clamp(32px,6vw,56px); line-height:1.15; font-weight:800}
+    h1 .accent{color:var(--accent)}
+    .sub{
+      color:#cfcfe9; opacity:.92; max-width:780px; margin:0 auto 22px; line-height:1.65; font-size:clamp(14px,2.2vw,18px);
+    }
+    .cta{
+      display:inline-block; padding:12px 26px; border-radius:9999px; font-weight:700; text-decoration:none;
+      color:#fff; background:linear-gradient(90deg,var(--accent),var(--accent2));
+      box-shadow:0 10px 24px rgba(155,93,255,.35); transition:.2s;
+    }
+    .cta:hover{transform:translateY(-1px); box-shadow:0 12px 28px rgba(155,93,255,.45)}
 
-    .hero {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      text-align: center;
-      z-index: 2;
+    /* subtle darkener behind hero text for readability */
+    .hero::before{
+      content:""; position:absolute; inset:0; z-index:-1;
+      background:radial-gradient(circle at 50% 40%, rgba(0,0,0,.35), transparent 60%);
     }
-    .hero h1 {
-      font-size: 3.5rem;
-      margin-bottom: 15px;
+
+    /* ========== Sections ========== */
+    .section{position:relative; z-index:10; padding:96px 20px; text-align:center}
+    .section h2{font-size:clamp(28px,4.4vw,40px); margin:0 0 26px; color:#d7c6ff}
+    .section.dark{background:rgba(255,255,255,.04)}
+
+    .projects-grid{
+      display:flex; gap:28px; flex-wrap:wrap; justify-content:center; align-items:stretch; max-width:1100px; margin:0 auto;
     }
-    .hero h1 span { color: #8a63f9; }
-    .hero p {
-      font-size: 1.1rem;
-      color: #ccc;
-      max-width: 600px;
-      margin: 0 auto 20px;
-      line-height: 1.6;
+    .card{
+      width:min(320px,90vw); background:rgba(255,255,255,.05);
+      border:1px solid rgba(255,255,255,.08); border-radius:18px; padding:22px; text-align:left;
+      box-shadow:0 10px 30px rgba(0,0,0,.35);
     }
-    .hero a {
-      background: linear-gradient(90deg, #6a00ff, #9b5dff);
-      color: #fff;
-      padding: 12px 30px;
-      border-radius: 50px;
-      text-decoration: none;
-      font-weight: 600;
-      display: inline-block;
-      box-shadow: 0 0 15px rgba(155,93,255,0.4);
+    .card h3{margin:0 0 8px}
+    .card p{color:#ddd; font-size:15px; line-height:1.6}
+    .card .btn{margin-top:14px}
+
+    .btn{
+      display:inline-block; padding:10px 18px; border-radius:9999px; text-decoration:none; color:#fff;
+      background:linear-gradient(90deg,var(--accent),var(--accent2)); transition:.2s;
     }
-    .hero a:hover {
-      transform: scale(1.05);
+    .btn:hover{transform:translateY(-1px)}
+
+    .skills{
+      display:flex; flex-wrap:wrap; gap:14px; justify-content:center; max-width:900px; margin:0 auto;
     }
+    .skills span{
+      padding:10px 16px; border-radius:9999px; background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.1);
+    }
+
+    footer{
+      text-align:center; padding:42px 12px; color:#a7a7b7; background:rgba(0,0,0,.6); border-top:1px solid rgba(255,255,255,.06)
+    }
+    footer a{color:#cdb7ff; text-decoration:none}
   </style>
 </head>
 <body>
+
+  <!-- Fixed header -->
   <header>
     <div class="brand">Dinesh<span>•</span>Bhairoju</div>
     <nav>
-      <a href="#">Work</a>
-      <a href="#">Skills</a>
-      <a href="#">Contact</a>
+      <a href="#projects">Work</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact">Contact</a>
     </nav>
   </header>
 
-  <div class="hero">
-    <h1>Hey, I'm <span>Dinesh Bhairoju</span></h1>
-    <p>AI-first Digital Marketer & Web Developer — I design automations, websites, and SEO systems that drive measurable growth.</p>
-    <a href="#">See Projects ↓</a>
-  </div>
+  <!-- 3D background -->
+  <canvas id="bg"></canvas>
 
-  <script src="https://cdn.jsdelivr.net/npm/three@0.152.2/build/three.min.js"></script>
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <div>
+      <img src="dinesh.jpg" alt="Dinesh Bhairoju" class="avatar" />
+      <h1>Hey, I'm <span class="accent">Dinesh Bhairoju</span></h1>
+      <p class="sub">AI-first Digital Marketer & Web Developer — I design automations, websites, and SEO systems that drive measurable growth.</p>
+      <a class="cta" href="#projects">See Projects ↓</a>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects" class="section">
+    <h2>🚀 Featured Projects</h2>
+    <div class="projects-grid">
+      <article class="card">
+        <h3>AI Marketing Lab</h3>
+        <p>End-to-end digital growth systems using AI. Funnels, SEO at scale, and automation orchestration.</p>
+        <a class="btn" href="https://aimarketinglab.in" target="_blank" rel="noopener">Visit</a>
+      </article>
+      <article class="card">
+        <h3>Darzi App</h3>
+        <p>On-demand tailoring marketplace. Optimized onboarding, notifications, and analytics loops.</p>
+        <a class="btn" href="https://darzi.services" target="_blank" rel="noopener">Visit</a>
+      </article>
+      <article class="card">
+        <h3>The Beldior</h3>
+        <p>Premium skincare storefront with conversion-focused storytelling and automated email flows.</p>
+        <a class="btn" href="https://beldior.com" target="_blank" rel="noopener">Visit</a>
+      </article>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills" class="section dark">
+    <h2>💡 Skills & Tools</h2>
+    <div class="skills">
+      <span>AI Automation</span><span>Web Development</span><span>SEO & AEO</span>
+      <span>UI/UX</span><span>Performance Marketing</span><span>ChatGPT / n8n / Make</span>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="section">
+    <h2>📬 Get In Touch</h2>
+    <p class="sub" style="margin-bottom:18px">Have a project in mind? Let’s create something measurable together.</p>
+    <a class="cta" href="mailto:dineshbhairoju@gmail.com">Send Email</a>
+  </section>
+
+  <footer>
+    <p>© <span id="year"></span> Dinesh Bhairoju — Built with ❤️ + Three.js</p>
+    <p><a href="https://github.com/dineshbhairoju" target="_blank" rel="noopener">GitHub</a> ·
+       <a href="https://www.linkedin.com/in/dineshbhairoju" target="_blank" rel="noopener">LinkedIn</a></p>
+  </footer>
+
+  <!-- Three.js -->
+  <script src="https://cdn.jsdelivr.net/npm/three@0.154.0/build/three.min.js"></script>
   <script>
-    // === Scene Setup ===
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(50, innerWidth / innerHeight, 0.1, 100);
-    camera.position.z = 4;
+    // Year
+    document.getElementById('year').textContent = new Date().getFullYear();
 
-    const renderer = new THREE.WebGLRenderer({ antialias: true });
+    // Smooth scroll for nav/CTA
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click',e=>{
+        const id=a.getAttribute('href');
+        if(id.length>1){ e.preventDefault(); document.querySelector(id)?.scrollIntoView({behavior:'smooth'}); }
+      });
+    });
+
+    // ===== THREE SETUP =====
+    const canvas = document.getElementById('bg');
+    const renderer = new THREE.WebGLRenderer({ canvas, antialias:true, alpha:true });
+    renderer.setPixelRatio(Math.min(devicePixelRatio,2));
     renderer.setSize(innerWidth, innerHeight);
-    document.body.appendChild(renderer.domElement);
 
-    // === Lights ===
-    const dir = new THREE.DirectionalLight(0xffffff, 1.2);
-    dir.position.set(5, 2, 5);
-    scene.add(dir);
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(50, innerWidth/innerHeight, 0.1, 200);
+    camera.position.set(0,0,6);
 
-    const ambient = new THREE.AmbientLight(0x404040, 0.6);
-    scene.add(ambient);
+    // Lights
+    const dir = new THREE.DirectionalLight(0xffffff, 1.2); dir.position.set(5,3,5);
+    const amb = new THREE.AmbientLight(0x6666aa, .55);
+    scene.add(dir, amb);
 
-    // === Stars background ===
-    const starsGeom = new THREE.BufferGeometry();
-    const starCount = 2000;
-    const starPositions = new Float32Array(starCount * 3);
-    for (let i = 0; i < starCount * 3; i++) {
-      starPositions[i] = (Math.random() - 0.5) * 100;
-    }
-    starsGeom.setAttribute('position', new THREE.BufferAttribute(starPositions, 3));
-    const starsMat = new THREE.PointsMaterial({ color: 0xffffff, size: 0.3 });
-    const stars = new THREE.Points(starsGeom, starsMat);
-    scene.add(stars);
+    // Stars
+    const starGeo = new THREE.BufferGeometry();
+    const starCnt = 1600; const arr = new Float32Array(starCnt*3);
+    for(let i=0;i<arr.length;i++) arr[i] = (Math.random()-0.5)*120;
+    starGeo.setAttribute('position', new THREE.BufferAttribute(arr,3));
+    scene.add(new THREE.Points(starGeo, new THREE.PointsMaterial({size:0.9, color:0xffffff})));
 
-    // === Earth Group ===
-    const earthGroup = new THREE.Group();
-    scene.add(earthGroup);
+    // Earth group
+    const g = new THREE.Group(); scene.add(g);
 
-    // === Load Textures ===
     const loader = new THREE.TextureLoader();
-    const earthDay   = loader.load('/assets/earth/earth_day.jpg');
-    const earthNight = loader.load('/assets/earth/earth_night.jpg');
-    const cloudsMap  = loader.load('/assets/earth/earth_clouds.png');
+    const day   = loader.load('earth_day.jpg');
+    const night = loader.load('earth_night.jpg');
 
-    // === Day & Night Shader Material ===
-    const earthUniforms = {
-      uDay: { value: earthDay },
-      uNight: { value: earthNight },
-      uLightDir: { value: dir.position.clone().normalize() }
-    };
+    // Optional clouds (load only if present)
+    let cloudsTex = null;
+    loader.load('earth_clouds.png',
+      tex => cloudsTex = tex,
+      undefined,
+      () => {} // ignore error if file not found
+    );
 
-    const earthMaterial = new THREE.ShaderMaterial({
-      uniforms: earthUniforms,
-      vertexShader: `
-        varying vec2 vUv;
-        varying vec3 vNormalW;
-        void main() {
-          vUv = uv;
-          vNormalW = normalize(mat3(modelMatrix) * normal);
-          gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
-        }
-      `,
-      fragmentShader: `
-        varying vec2 vUv;
-        varying vec3 vNormalW;
-        uniform sampler2D uDay;
-        uniform sampler2D uNight;
-        uniform vec3 uLightDir;
-        void main() {
-          vec3 dayCol = texture2D(uDay, vUv).rgb;
-          vec3 nightCol = texture2D(uNight, vUv).rgb * 1.3;
-          float nl = dot(normalize(vNormalW), normalize(uLightDir));
-          float dayMix = smoothstep(-0.1, 0.3, nl);
-          vec3 col = mix(nightCol, dayCol, dayMix);
-          gl_FragColor = vec4(col, 1.0);
-        }
-      `
-    });
-
-    // === Earth Sphere ===
-    const earthGeom = new THREE.SphereGeometry(1.6, 64, 64);
-    const earth = new THREE.Mesh(earthGeom, earthMaterial);
+    // Earth with day map + emissive night lights
+    const earth = new THREE.Mesh(
+      new THREE.SphereGeometry(2, 64, 64),
+      new THREE.MeshPhongMaterial({
+        map: day,
+        emissiveMap: night,
+        emissive: new THREE.Color(0xffffff),
+        emissiveIntensity: 1.1
+      })
+    );
     earth.rotation.z = THREE.MathUtils.degToRad(23.4);
-    earthGroup.add(earth);
+    g.add(earth);
 
-    // === Clouds (optional layer) ===
-    const cloudsGeom = new THREE.SphereGeometry(1.62, 64, 64);
-    const cloudsMat = new THREE.MeshLambertMaterial({
-      map: cloudsMap,
-      transparent: true,
-      opacity: 0.4,
-      depthWrite: false
-    });
-    const clouds = new THREE.Mesh(cloudsGeom, cloudsMat);
-    earthGroup.add(clouds);
+    // Atmosphere glow
+    const glow = new THREE.Mesh(
+      new THREE.SphereGeometry(2.15, 64, 64),
+      new THREE.MeshBasicMaterial({ color:0x6a00ff, transparent:true, opacity:.18, side:THREE.BackSide, blending:THREE.AdditiveBlending })
+    );
+    g.add(glow);
 
-    // === Atmosphere Glow ===
-    const atmGeom = new THREE.SphereGeometry(1.68, 64, 64);
-    const atmMat = new THREE.MeshBasicMaterial({
-      color: 0x6f5bff,
-      transparent: true,
-      opacity: 0.15,
-      side: THREE.BackSide,
-      blending: THREE.AdditiveBlending
-    });
-    const atmosphere = new THREE.Mesh(atmGeom, atmMat);
-    earthGroup.add(atmosphere);
+    // Clouds layer (added after optional texture loads)
+    const addClouds = ()=> {
+      if(!cloudsTex) return;
+      const clouds = new THREE.Mesh(
+        new THREE.SphereGeometry(2.04, 64, 64),
+        new THREE.MeshLambertMaterial({ map: cloudsTex, transparent:true, opacity:.38, depthWrite:false })
+      );
+      clouds.name='clouds'; g.add(clouds);
+    };
+    setTimeout(addClouds, 500); // attempt after a short delay
 
-    // === Mouse Parallax ===
-    let mx = 0, my = 0, tx = 0, ty = 0;
-    document.addEventListener('pointermove', e => {
-      mx = (e.clientX / innerWidth - 0.5) * 2;
-      my = (e.clientY / innerHeight - 0.5) * 2;
-    });
+    // Mouse parallax
+    let mx=0,my=0, tx=0,ty=0;
+    addEventListener('pointermove',e=>{ mx=(e.clientX/innerWidth - .5)*2; my=(e.clientY/innerHeight - .5)*2; });
 
-    // === Animation Loop ===
-    function tick() {
-      earth.rotation.y += 0.0008;
-      clouds.rotation.y += 0.001;
-      stars.rotation.y += 0.0005;
+    // Animate
+    function tick(){
+      earth.rotation.y += 0.0012;
+      glow.rotation.y  += 0.0012;
+      const clouds = g.getObjectByName('clouds'); if(clouds) clouds.rotation.y += 0.0016;
 
-      tx += (mx - tx) * 0.05;
-      ty += (my - ty) * 0.05;
-      camera.position.x = tx * 0.6;
-      camera.position.y = -ty * 0.4;
-      camera.lookAt(0, 0, 0);
+      tx += (mx-tx)*0.05; ty += (my-ty)*0.05;
+      camera.position.x = tx*0.7; camera.position.y = -ty*0.5;
+      camera.lookAt(0,0,0);
 
-      renderer.render(scene, camera);
+      renderer.render(scene,camera);
       requestAnimationFrame(tick);
     }
     tick();
 
-    window.addEventListener('resize', () => {
-      camera.aspect = innerWidth / innerHeight;
-      camera.updateProjectionMatrix();
+    // Resize
+    addEventListener('resize', ()=>{
+      camera.aspect = innerWidth/innerHeight; camera.updateProjectionMatrix();
       renderer.setSize(innerWidth, innerHeight);
     });
   </script>
