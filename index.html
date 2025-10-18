@@ -1,421 +1,244 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dinesh Bhairoju – 3D Portfolio</title>
 
-<title>Dinesh Bhairoju — 3D Portfolio</title>
-<meta name="description" content="AI-first Digital Marketer & Web Developer. 3D portfolio with automation, SEO, and modern web builds." />
+  <meta name="description" content="AI-first Digital Marketer & Web Developer. 3D portfolio with automation, SEO, and modern web builds." />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Dinesh Bhairoju – 3D Portfolio" />
+  <meta property="og:description" content="AI-first Digital Marketer & Web Developer. 3D portfolio with automation, SEO, and modern web builds." />
+  <meta property="og:image" content="https://dineshbhairoju.github.io/dinesh.jpg" />
+  <meta property="og:url" content="https://dineshbhairoju.github.io/" />
+  <meta name="twitter:card" content="summary_large_image" />
 
-<!-- SEO / Share -->
-<meta property="og:type" content="website" />
-<meta property="og:title" content="Dinesh Bhairoju — 3D Portfolio" />
-<meta property="og:description" content="AI-first Digital Marketer & Web Developer. 3D portfolio with automation, SEO, and modern web builds." />
-<meta property="og:image" content="https://dineshbhairoju.github.io/cover.jpg" />
-<meta property="og:url" content="https://dineshbhairoju.github.io/" />
-<meta name="twitter:card" content="summary_large_image" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
 
-<!-- Fonts -->
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      margin: 0;
+      font-family: "Inter", sans-serif;
+      background: linear-gradient(135deg, #1a0137, #4c00ff);
+      color: white;
+      text-align: center;
+      overflow-x: hidden;
+    }
 
-<style>
-  :root{
-    --bg:#0b0b12;
-    --fg:#eaeaf2;
-    --muted:#a7a7be;
-    --accent:#8a63f9;
-    --accent-2:#a07bff;
-    --card:#13131a;
-    --glass:rgba(255,255,255,.06);
-    --glass-border:rgba(255,255,255,.12);
-  }
+    header {
+      padding: 80px 20px 40px;
+    }
 
-  *{box-sizing:border-box}
-  html,body{height:100%}
-  body{
-    margin:0;
-    font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-    color:var(--fg);
-    background:
-      radial-gradient(1200px 800px at 10% -10%, #2a1559 0%, transparent 60%),
-      radial-gradient(1000px 600px at 110% 10%, #1a1142 0%, transparent 65%),
-      var(--bg);
-    overflow-x:hidden;
-  }
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+    }
 
-  /* 3D Canvas fills the hero */
-  #bg{
-    position:fixed; inset:0;
-    z-index:-1; /* behind content */
-    background: radial-gradient(1200px 800px at 50% -20%, #2d0f64, transparent 60%);
-  }
+    p {
+      font-size: 1.1rem;
+      color: #d9cfff;
+      line-height: 1.6;
+    }
 
-  header.nav{
-    position:fixed; top:0; left:0; right:0;
-    height:64px; display:flex; align-items:center; justify-content:space-between;
-    padding:0 20px; z-index:10;
-    backdrop-filter: blur(10px);
-    background:linear-gradient(180deg, rgba(10,10,18,.65), rgba(10,10,18,.15));
-    border-bottom:1px solid var(--glass-border);
-  }
-  .brand{font-weight:800; letter-spacing:.3px}
-  .brand span{color:var(--accent)}
-  nav a{
-    color:var(--fg); text-decoration:none; margin:0 10px; font-weight:600; font-size:14px;
-    padding:8px 12px; border-radius:10px;
-  }
-  nav a:hover{background:var(--glass)}
+    a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+    }
 
-  /* Hero */
-  .hero{
-    min-height:92vh; display:grid; place-items:center; padding:120px 24px 64px;
-    text-align:center;
-  }
-  .hero .wrap{max-width:960px}
-  h1{font-size: clamp(36px, 7vw, 68px); margin:0 0 10px; line-height:1.08}
-  .gradient{
-    background:linear-gradient(135deg,var(--accent),var(--accent-2));
-    -webkit-background-clip:text; background-clip:text; color:transparent;
-  }
-  .lead{color:var(--muted); font-size: clamp(16px, 2.5vw, 20px)}
-  .cta{
-    display:inline-flex; gap:10px; align-items:center; margin-top:22px;
-    background:linear-gradient(135deg,var(--accent),var(--accent-2));
-    color:#fff; text-decoration:none; padding:12px 22px; border-radius:999px; font-weight:700;
-    box-shadow:0 12px 24px rgba(138,99,249,.25); transition:.25s transform, .25s box-shadow;
-  }
-  .cta:hover{transform: translateY(-2px); box-shadow:0 16px 32px rgba(138,99,249,.35)}
+    .btn {
+      display: inline-block;
+      margin-top: 20px;
+      background: linear-gradient(90deg, #6A00FF, #9B5DFF);
+      color: white;
+      padding: 12px 28px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: 0.3s;
+    }
 
-  /* Sections */
-  section{max-width:1100px; margin:0 auto; padding:64px 20px}
-  h2{font-size: clamp(24px, 4vw, 36px); margin:0 0 16px}
-  .sub{color:var(--muted); margin:0 0 24px}
+    .btn:hover {
+      opacity: 0.85;
+      transform: scale(1.05);
+    }
 
-  .grid{
-    display:grid; grid-template-columns:repeat(12, 1fr); gap:18px;
-  }
-  .card{
-    grid-column: span 12;
-    background:var(--glass); border:1px solid var(--glass-border);
-    border-radius:16px; padding:18px; backdrop-filter: blur(12px);
-    box-shadow: 0 10px 30px rgba(0,0,0,.25);
-  }
-  .card h3{margin:0 0 8px}
-  .meta{color:var(--muted); font-size:14px; margin:8px 0 12px}
-  .links a{color:#fff; text-decoration:none}
-  .links a:hover{text-decoration:underline}
+    section {
+      padding: 60px 20px;
+      background: #100224;
+    }
 
-  .badges{display:flex; flex-wrap:wrap; gap:8px; padding:0; margin:8px 0 0; list-style:none}
-  .badges li{
-    background:#1b1b26; color:#d9d9ec;
-    padding:6px 10px; border-radius:8px; font-size:13px;
-  }
+    footer {
+      background: #0a0118;
+      padding: 20px;
+      color: #b8aefc;
+      font-size: 0.9rem;
+    }
 
-  @media (min-width:780px){
-    .card.span-6{grid-column: span 6}
-    .card.span-4{grid-column: span 4}
-  }
+    /* Avatar Style */
+    .avatar {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      border: 3px solid rgba(255,255,255,0.2);
+      box-shadow: 0 0 25px rgba(147, 92, 255, 0.6),
+                  0 0 45px rgba(147, 92, 255, 0.3);
+      margin-bottom: 20px;
+      object-fit: cover;
+      transition: transform 0.4s ease, box-shadow 0.3s ease;
+    }
 
-  footer{padding:40px 20px; text-align:center; color:var(--muted); border-top:1px solid var(--glass-border)}
-  a.inline{color:#cfc7ff}
-</style>
+    .avatar:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 35px rgba(180, 120, 255, 0.8),
+                  0 0 70px rgba(180, 120, 255, 0.4);
+    }
+
+    /* Typewriter Effect */
+    .type-wrap {
+      margin-top: 10px;
+      font-size: 18px;
+      color: #d6cffb;
+      min-height: 26px;
+    }
+
+    .type { white-space: nowrap; }
+
+    .cursor {
+      display: inline-block;
+      margin-left: 2px;
+      opacity: 1;
+      animation: blink 1s step-end infinite;
+    }
+
+    @keyframes blink { 50% { opacity: 0; } }
+
+    @media (prefers-reduced-motion: reduce) {
+      .cursor { animation: none; }
+    }
+  </style>
 </head>
+
 <body>
+  <header>
+    <img src="dinesh.jpg" alt="Dinesh Bhairoju portrait"
+         class="avatar" width="140" height="140" loading="eager" />
 
-<canvas id="bg" aria-hidden="true"></canvas>
+    <h1>Hey, I'm <span style="color:#b48cff;">Dinesh Bhairoju</span></h1>
 
-<header class="nav" role="navigation">
-  <div class="brand">Dinesh<span>.</span>Bh</div>
-  <nav>
-    <a href="#work">Work</a>
-    <a href="#skills">Skills</a>
-    <a href="#contact">Contact</a>
-  </nav>
-</header>
+    <p class="lead">
+      AI-first Digital Marketer & Web Developer — I help startups scale using
+      <strong>automation, performance marketing,</strong> and <strong>AI-powered content systems.</strong>
+    </p>
 
-<!-- HERO -->
-<section class="hero" id="home" aria-label="Intro">
-  <div class="wrap">
+    <p class="type-wrap" aria-live="polite">
+      <span id="typewriter" class="type"></span>
+      <span class="cursor" aria-hidden="true">|</span>
+    </p>
 
-    
-    <img src="fed41148-60cd-44f6-bd9a-558e5aa41782.jpg" alt="Dinesh Bhairoju portrait"
-     class="avatar" width="140" height="140" loading="eager" />
+    <a href="#projects" class="btn">See My Work ↓</a>
+  </header>
 
+  <section id="projects">
+    <h2>🚀 Featured Projects</h2>
+    <p><strong>1. AI Workflow Automation:</strong> Built a no-code automation using n8n + Apify to generate qualified startup leads.</p>
+    <p><strong>2. Digital Marketing Dashboard:</strong> Created live analytics reporting in Google Sheets powered by GPT automation.</p>
+  </section>
 
-   <p class="type-wrap" aria-live="polite">
-  <span id="typewriter" class="type"></span>
-  <span class="cursor" aria-hidden="true">|</span>
-</p>
+  <section id="contact">
+    <h2>📩 Contact Me</h2>
+    <p>Email: <a href="mailto:dineshbhairoju@gmail.com">dineshbhairoju@gmail.com</a></p>
+    <a href="https://www.linkedin.com/in/YOUR-LINKEDIN-USERNAME/" class="btn" target="_blank">Connect on LinkedIn</a>
+  </section>
 
-    <a class="cta" href="#work">See My Projects ↓</a>
-  </div>
-</section>
+  <footer>
+    <p>© <span id="year"></span> Dinesh Bhairoju · Built with ❤️ using GitHub Pages</p>
+  </footer>
 
-
-<!-- WORK -->
-<section id="work" aria-labelledby="work-title">
-  <h2 id="work-title">Selected Work</h2>
-  <p class="sub">Outcome-driven projects across automation, marketing ops, and web.</p>
-
-  <div class="grid">
-    <article class="card span-6">
-      <h3>AI Lead Gen Workflow</h3>
-      <p><strong>Result:</strong> 2.1× qualified leads in 6 weeks using n8n + Apify + Sheets.</p>
-      <p class="meta">Role: Automation · Stack: n8n · Apify · OpenAI · Google Sheets</p>
-      <p class="links">
-        <a href="#" target="_blank" rel="noopener">Case Study</a> ·
-        <a href="#" target="_blank" rel="noopener">Demo</a>
-      </p>
-    </article>
-
-    <article class="card span-6">
-      <h3>Agency Website Revamp</h3>
-      <p><strong>Result:</strong> +38% conversions in 30 days via faster UX, better copy, and SEO structure.</p>
-      <p class="meta">Role: Dev & SEO · Stack: WordPress · Elementor</p>
-      <p class="links">
-        <a href="#" target="_blank" rel="noopener">Before / After</a>
-      </p>
-    </article>
-
-    <article class="card span-4">
-      <h3>E-commerce Audits</h3>
-      <p><strong>Result:</strong> –22% CPA and +31% ROAS through analytics + landing tests.</p>
-      <ul class="badges"><li>GA4</li><li>Hotjar</li><li>Meta Ads</li><li>A/B</li></ul>
-    </article>
-
-    <article class="card span-4">
-      <h3>Content Engine</h3>
-      <p><strong>Result:</strong> 5× blog velocity with AI-assisted briefs + internal links.</p>
-      <ul class="badges"><li>ChatGPT</li><li>Sheets</li><li>Programmatic SEO</li></ul>
-    </article>
-
-    <article class="card span-4">
-      <h3>Local SEO System</h3>
-      <p><strong>Result:</strong> Top-3 pack in 45 days for key services; GMB and schema fixes.</p>
-      <ul class="badges"><li>GMB</li><li>Schema</li><li>Citations</li></ul>
-    </article>
-  </div>
-</section>
-
-<!-- SKILLS -->
-<section id="skills" aria-labelledby="skills-title">
-  <h2 id="skills-title">Skills</h2>
-  <p class="sub">A mix of marketing strategy, code, and automation.</p>
-  <ul class="badges">
-    <li>n8n</li><li>Apify</li><li>OpenAI</li><li>JavaScript</li><li>WordPress</li>
-    <li>Elementor</li><li>SEO</li><li>GA4</li><li>Automation</li><li>Analytics</li>
-  </ul>
-</section>
-
-<!-- CONTACT -->
-<section id="contact" aria-labelledby="contact-title">
-  <h2 id="contact-title">Let’s Work</h2>
-  <p class="sub">Open to freelance & collaborations.</p>
-  <p>Email: <a class="inline" href="mailto:dineshbhairoju@gmail.com">dineshbhairoju@gmail.com</a> ·
-     LinkedIn: <a class="inline" href="https://www.linkedin.com/in/" target="_blank" rel="noopener">Connect</a></p>
-  <a class="cta" href="mailto:dineshbhairoju@gmail.com">Start a Project →</a>
-</section>
-
-<footer>
-  © <span id="year"></span> Dinesh Bhairoju · Built with Three.js on GitHub Pages
-</footer>
-
-<!-- Three.js (CDN) -->
-<!-- JSON-LD -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Person",
-  "name": "Dinesh Bhairoju",
-  "url": "https://dineshbhairoju.github.io/",
-  "image": "https://dineshbhairoju.github.io/dinesh.jpg",
-  "jobTitle": "Digital Marketer & Web Developer",
-  "email": "mailto:dineshcharydinu@gmail.com",
-  "sameAs": [
-    "https://github.com/dineshbhairoju",
-    "https://www.linkedin.com/in/Dineshbhairoju/"
-  ]
-}
-</script>
-
-
-<script>
-  // ===== 3D Scene =====
-  const canvas = document.getElementById('bg');
-  const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(60, innerWidth/innerHeight, 0.1, 100);
-  camera.position.set(0, 0, 6);
-
-  const renderer = new THREE.WebGLRenderer({ canvas, antialias:true, alpha:true });
-  renderer.setSize(innerWidth, innerHeight);
-  renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
-  renderer.outputColorSpace = THREE.SRGBColorSpace;
-
-  // Lights
-  const dir = new THREE.DirectionalLight(0xffffff, 1.0); dir.position.set(3,3,2);
-  const amb = new THREE.AmbientLight(0x9999ff, 0.6);
-  scene.add(dir, amb);
-
-  // Glossy purple blob
-  const geo = new THREE.IcosahedronGeometry(1.5, 32);
-  const mat = new THREE.MeshStandardMaterial({
-    color: 0x8a63f9,
-    roughness: 0.2,
-    metalness: 0.4
-  });
-  const blob = new THREE.Mesh(geo, mat);
-  scene.add(blob);
-
-  // Gentle vertex noise (wobble)
-  const basePositions = geo.attributes.position.array.slice();
-  function wobble(t){
-    const pos = geo.attributes.position;
-    for(let i=0;i<pos.count;i++){
-      const ix = i*3, iy = ix+1, iz = ix+2;
-      pos.array[ix] = basePositions[ix]   * (1 + 0.03*Math.sin(t + ix*0.02));
-      pos.array[iy] = basePositions[iy]   * (1 + 0.03*Math.cos(t*0.8 + iy*0.015));
-      pos.array[iz] = basePositions[iz]   * (1 + 0.03*Math.sin(t*1.2 + iz*0.01));
-    }
-    pos.needsUpdate = true;
-    geo.computeVertexNormals();
+  <!-- JSON-LD Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Dinesh Bhairoju",
+    "url": "https://dineshbhairoju.github.io/",
+    "image": "https://dineshbhairoju.github.io/dinesh.jpg",
+    "jobTitle": "Digital Marketer & Web Developer",
+    "email": "mailto:dineshbhairoju@gmail.com",
+    "sameAs": [
+      "https://github.com/dineshbhairoju",
+      "https://www.linkedin.com/in/YOUR-LINKEDIN-USERNAME/"
+    ]
   }
+  </script>
 
-  // Starfield particles
-  const starGeo = new THREE.BufferGeometry();
-  const count = 500;
-  const positions = new Float32Array(count*3);
-  for (let i=0;i<count;i++){
-    positions[i*3+0] = (Math.random()-0.5)*20;
-    positions[i*3+1] = (Math.random()-0.5)*14;
-    positions[i*3+2] = (Math.random()-0.2)*-8 - 2; // mainly behind
-  }
-  starGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-  const starMat = new THREE.PointsMaterial({ color:0xbba7ff, size:0.02, transparent:true, opacity:0.8 });
-  const stars = new THREE.Points(starGeo, starMat);
-  scene.add(stars);
-
-  // Mouse parallax
-  let mx=0,my=0, tx=0,ty=0;
-  window.addEventListener('pointermove', (e)=>{
-    mx = (e.clientX / innerWidth  - 0.5) * 2;
-    my = (e.clientY / innerHeight - 0.5) * 2;
-  });
-
-  // Animate
-  let t=0;
-  function tick(){
-    t += 0.01;
-    wobble(t);
-    blob.rotation.y += 0.004;
-    blob.rotation.x = Math.sin(t*0.5)*0.15;
-
-    // smooth camera offset
-    tx += (mx - tx)*0.04;
-    ty += (my - ty)*0.04;
-    camera.position.x = tx * 0.8;
-    camera.position.y = -ty * 0.6;
-    camera.lookAt(0,0,0);
-
-    stars.rotation.y += 0.0008;
-
-    renderer.render(scene, camera);
-    requestAnimationFrame(tick);
-  }
-  tick();
-
-  // Resize
-  addEventListener('resize', ()=>{
-    camera.aspect = innerWidth/innerHeight;
-    camera.updateProjectionMatrix();
-    renderer.setSize(innerWidth, innerHeight);
-    renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
-  });
-
-  // Year
-  document.getElementById('year').textContent = new Date().getFullYear();
-</script>
-
-<!-- JSON-LD -->
-<script type="application/ld+json">
-{
-  "@context":"https://schema.org",
-  "@type":"Person",
-  "name":"Dinesh Bhairoju",
-  "url":"https://dineshbhairoju.github.io/",
-  "jobTitle":"Digital Marketer & Web Developer",
-  "sameAs":[
-    "https://github.com/dineshbhairoju",
-    "https://www.linkedin.com/in/"
-  ]
-}
-</script>
+  <!-- 3D Hover Effect -->
   <script>
-  const avatar = document.querySelector('.avatar');
-
-  // Add safety check in case avatar doesn't exist yet
-  if (avatar) {
-    document.addEventListener('mousemove', (e) => {
-      const xAxis = (window.innerWidth / 2 - e.pageX) / 50;
-      const yAxis = (window.innerHeight / 2 - e.pageY) / 50;
-      avatar.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
-    });
-
-    document.addEventListener('mouseleave', () => {
-      avatar.style.transform = 'rotateY(0deg) rotateX(0deg)';
-    });
-  }
-</script>
-<script>
-(function(){
-  const el = document.getElementById('typewriter');
-  if (!el) return;
-
-  // Phrases to cycle through — edit these to your liking
-  const messages = [
-    'AI Marketer',
-    'Web Developer',
-    'Automation Expert',
-    'SEO & Analytics',
-    'No-Code Builder (n8n, Apify)'
-  ];
-
-  const typeSpeed = 70;     // ms per character typed
-  const eraseSpeed = 45;    // ms per character erased
-  const holdTime   = 1200;  // pause when full word is shown
-
-  let msgIndex = 0;
-  let charIndex = 0;
-  let typing = true;        // typing or deleting state
-
-  function tick(){
-    const current = messages[msgIndex];
-
-    if (typing){
-      charIndex++;
-      el.textContent = current.slice(0, charIndex);
-      if (charIndex === current.length){
-        typing = false;
-        return setTimeout(tick, holdTime);
-      }
-      return setTimeout(tick, typeSpeed);
-    } else {
-      charIndex--;
-      el.textContent = current.slice(0, charIndex);
-      if (charIndex === 0){
-        typing = true;
-        msgIndex = (msgIndex + 1) % messages.length;
-        return setTimeout(tick, 300);
-      }
-      return setTimeout(tick, eraseSpeed);
+    const avatar = document.querySelector('.avatar');
+    if (avatar) {
+      document.addEventListener('mousemove', (e) => {
+        const xAxis = (window.innerWidth / 2 - e.pageX) / 50;
+        const yAxis = (window.innerHeight / 2 - e.pageY) / 50;
+        avatar.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
+      });
+      document.addEventListener('mouseleave', () => {
+        avatar.style.transform = 'rotateY(0deg) rotateX(0deg)';
+      });
     }
-  }
+  </script>
 
-  // Start the loop
-  tick();
-})();
-</script>
+  <!-- Typewriter Effect -->
+  <script>
+    (function(){
+      const el = document.getElementById('typewriter');
+      if (!el) return;
 
+      const messages = [
+        'AI Marketer',
+        'Web Developer',
+        'Automation Expert',
+        'SEO & Analytics',
+        'No-Code Builder (n8n, Apify)'
+      ];
+
+      const typeSpeed = 70;
+      const eraseSpeed = 45;
+      const holdTime = 1200;
+
+      let msgIndex = 0;
+      let charIndex = 0;
+      let typing = true;
+
+      function tick(){
+        const current = messages[msgIndex];
+
+        if (typing){
+          charIndex++;
+          el.textContent = current.slice(0, charIndex);
+          if (charIndex === current.length){
+            typing = false;
+            return setTimeout(tick, holdTime);
+          }
+          return setTimeout(tick, typeSpeed);
+        } else {
+          charIndex--;
+          el.textContent = current.slice(0, charIndex);
+          if (charIndex === 0){
+            typing = true;
+            msgIndex = (msgIndex + 1) % messages.length;
+            return setTimeout(tick, 300);
+          }
+          return setTimeout(tick, eraseSpeed);
+        }
+      }
+
+      tick();
+    })();
+  </script>
+
+  <script>
+    // Auto Year Update
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
