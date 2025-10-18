@@ -1,373 +1,238 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Dinesh Bhairoju — 3D Portfolio</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dinesh Bhairoju – 3D Portfolio</title>
+  <meta name="description" content="AI-first Digital Marketer & Web Developer. 3D portfolio with automation, SEO, and modern web builds." />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body {
+      height: 100%;
+      background: radial-gradient(ellipse at top, #0c0024, #000);
+      overflow: hidden;
+      font-family: 'Poppins', sans-serif;
+      color: #fff;
+    }
 
-<meta name="description" content="AI-first Digital Marketer & Web Developer. I build automations, websites, and SEO systems that drive growth." />
-<meta property="og:type" content="website" />
-<meta property="og:title" content="Dinesh Bhairoju — 3D Portfolio" />
-<meta property="og:description" content="AI-first Digital Marketer & Web Developer." />
-<meta property="og:image" content="https://dineshbhairoju.github.io/dinesh.jpg" />
-<meta property="og:url" content="https://dineshbhairoju.github.io/" />
-<meta name="twitter:card" content="summary_large_image" />
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 50px;
+      background: rgba(0,0,0,0.4);
+      backdrop-filter: blur(10px);
+      z-index: 10;
+    }
+    .brand {
+      font-weight: 800;
+      font-size: 22px;
+      letter-spacing: .5px;
+      white-space: nowrap;
+    }
+    .brand span {
+      color: #8a63f9;
+    }
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      margin-left: 25px;
+      font-weight: 500;
+    }
+    nav a:hover {
+      color: #8a63f9;
+    }
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet" />
+    canvas { display: block; }
 
-<style>
-  :root{
-    --bg:#0b0b12; --fg:#eaeaf2; --muted:#a7a7be;
-    --accent:#8a63f9; --accent2:#a07bff;
-    --glass:rgba(255,255,255,.06); --glass-b:#ffffff1f;
-  }
-  *{box-sizing:border-box}
-  html,body{height:100%}
-  body{
-    margin:0; font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-    color:var(--fg); background:var(--bg); overflow-x:hidden;
-  }
-
-  /* === 3D background canvas === */
-  #bg{ position:fixed; inset:0; z-index:-1; background: radial-gradient(1200px 700px at 50% -10%, #2b1462, transparent 60%); }
-
-  /* === top nav (transparent) === */
-  .nav{
-    position:fixed; top:0; left:0; right:0; height:64px; z-index:9;
-    display:flex; align-items:center; justify-content:space-between; padding:0 18px;
-    backdrop-filter: blur(12px);
-    background:linear-gradient(180deg, rgba(12,12,20,.65), rgba(12,12,20,.15));
-    border-bottom:1px solid var(--glass-b);
-  }
-  .brand {
-  font-weight: 800;
-  letter-spacing: .3px;
-  font-size: 22px;
-  padding-left: 10px;
-  white-space: nowrap; /* prevents name break */
-  color: #fff;
-}
-
-.brand span {
-  color: var(--accent);
-  margin: 0 4px;
-}
-
-  .brand span{color:var(--accent)}
-  .nav a{color:var(--fg); text-decoration:none; font-weight:600; padding:8px 10px; border-radius:10px}
-  .nav a:hover{background:var(--glass)}
-
-  /* === hero over 3D === */
-  .hero{
-    min-height:92vh; display:grid; place-items:center; padding:100px 20px 60px; text-align:center;
-  }
-  .hero .wrap{max-width:900px}
-  h1{font-size: clamp(36px, 6.5vw, 64px); margin:10px 0 8px; line-height:1.08}
-  .gradient{background:linear-gradient(135deg,var(--accent),var(--accent2)); -webkit-background-clip:text; background-clip:text; color:transparent}
-  .lead{color:var(--muted); font-size: clamp(16px, 2.6vw, 20px); margin:0 auto 8px; max-width:760px}
-
-  .cta{
-    display:inline-flex; align-items:center; gap:10px; margin-top:18px;
-    background:linear-gradient(135deg,var(--accent),var(--accent2)); color:#fff;
-    padding:12px 22px; border-radius:999px; font-weight:700; text-decoration:none;
-    box-shadow:0 14px 28px rgba(138,99,249,.28); transition:.25s transform,.25s box-shadow;
-  }
-  .cta:hover{transform:translateY(-2px); box-shadow:0 18px 36px rgba(138,99,249,.36)}
-
-  /* avatar */
-  .avatar{
-    width:140px; height:140px; border-radius:50%;
-    border:3px solid #ffffff33;
-    box-shadow:0 0 25px rgba(147, 92, 255, .6), 0 0 45px rgba(147, 92, 255, .3);
-    object-fit:cover; margin-bottom:16px;
-    transition:transform .4s ease, box-shadow .3s ease;
-  }
-  .avatar:hover{ transform:scale(1.05); box-shadow:0 0 35px rgba(180,120,255,.85), 0 0 70px rgba(180,120,255,.45) }
-
-  /* typewriter */
-  .type-wrap{ margin-top:6px; font-size:18px; color:#d6cffb; min-height:26px }
-  .type{ white-space:nowrap }
-  .cursor{ display:inline-block; margin-left:2px; opacity:1; animation:blink 1s step-end infinite }
-  @keyframes blink{ 50%{opacity:0} }
-  @media (prefers-reduced-motion:reduce){ .cursor{animation:none} }
-
-  /* sections */
-  section{ max-width:1100px; margin:0 auto; padding:64px 20px }
-  h2{font-size: clamp(24px, 4vw, 36px); margin:0 0 12px}
-  .sub{color:var(--muted); margin:0 0 20px}
-  .grid{ display:grid; grid-template-columns:repeat(12,1fr); gap:18px }
-  .card{
-    grid-column: span 12; background:var(--glass); border:1px solid var(--glass-b);
-    backdrop-filter: blur(12px); border-radius:16px; padding:18px; box-shadow:0 10px 30px #0008;
-  }
-  .meta{color:var(--muted); font-size:14px}
-  .links a{color:#fff}
-  @media (min-width:780px){ .span-6{grid-column:span 6} .span-4{grid-column:span 4} }
-
-  footer{ text-align:center; color:var(--muted); border-top:1px solid var(--glass-b); padding:40px 20px }
-</style>
+    .hero {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      z-index: 2;
+    }
+    .hero h1 {
+      font-size: 3.5rem;
+      margin-bottom: 15px;
+    }
+    .hero h1 span { color: #8a63f9; }
+    .hero p {
+      font-size: 1.1rem;
+      color: #ccc;
+      max-width: 600px;
+      margin: 0 auto 20px;
+      line-height: 1.6;
+    }
+    .hero a {
+      background: linear-gradient(90deg, #6a00ff, #9b5dff);
+      color: #fff;
+      padding: 12px 30px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      display: inline-block;
+      box-shadow: 0 0 15px rgba(155,93,255,0.4);
+    }
+    .hero a:hover {
+      transform: scale(1.05);
+    }
+  </style>
 </head>
 <body>
+  <header>
+    <div class="brand">Dinesh<span>•</span>Bhairoju</div>
+    <nav>
+      <a href="#">Work</a>
+      <a href="#">Skills</a>
+      <a href="#">Contact</a>
+    </nav>
+  </header>
 
-<canvas id="bg" aria-hidden="true"></canvas>
-
-<header class="nav">
-  <div class="brand">Dinesh<span>•</span>Bhairoju</div>
-  <nav>
-    <a href="#work">Work</a>
-    <a href="#skills">Skills</a>
-    <a href="#contact">Contact</a>
-  </nav>
-</header>
-
-<!-- HERO -->
-<section class="hero" id="home" aria-label="Intro">
-  <div class="wrap">
-    <img src="dinesh.jpg" alt="Dinesh Bhairoju portrait" class="avatar" width="140" height="140" loading="eager" />
-    <h1>Hey, I'm <span class="gradient">Dinesh Bhairoju</span></h1>
-    <p class="lead">AI-first Digital Marketer & Web Developer — I design automations, websites, and SEO systems that drive measurable growth.</p>
-
-    <p class="type-wrap" aria-live="polite">
-      <span id="typewriter" class="type"></span><span class="cursor" aria-hidden="true">|</span>
-    </p>
-
-    <a class="cta" href="#work">See Projects ↓</a>
+  <div class="hero">
+    <h1>Hey, I'm <span>Dinesh Bhairoju</span></h1>
+    <p>AI-first Digital Marketer & Web Developer — I design automations, websites, and SEO systems that drive measurable growth.</p>
+    <a href="#">See Projects ↓</a>
   </div>
-</section>
 
-<!-- WORK -->
-<section id="work" aria-labelledby="work-title">
-  <h2 id="work-title">Selected Work</h2>
-  <p class="sub">Outcome-driven projects across automation, marketing ops, and web.</p>
-  <div class="grid">
-    <article class="card span-6">
-      <h3>AI Lead Gen Workflow</h3>
-      <p><strong>Result:</strong> 2.1× qualified leads in 6 weeks using n8n + Apify + Sheets.</p>
-      <p class="meta">Role: Automation · Stack: n8n · Apify · OpenAI · Google Sheets</p>
-      <p class="links"><a href="#" target="_blank" rel="noopener">Case Study</a> · <a href="#" target="_blank" rel="noopener">Demo</a></p>
-    </article>
-    <article class="card span-6">
-      <h3>Agency Website Revamp</h3>
-      <p><strong>Result:</strong> +38% conversions in 30 days via UX speed, copy, and SEO structure.</p>
-      <p class="meta">Role: Dev & SEO · Stack: WordPress · Elementor</p>
-      <p class="links"><a href="#" target="_blank" rel="noopener">Before / After</a></p>
-    </article>
-    <article class="card span-4">
-      <h3>Content Engine</h3>
-      <p><strong>Result:</strong> 5× blog velocity with AI briefs & internal links.</p>
-      <p class="meta">ChatGPT · Programmatic SEO</p>
-    </article>
-    <article class="card span-4">
-      <h3>Local SEO System</h3>
-      <p><strong>Result:</strong> Top-3 pack in 45 days for core keywords.</p>
-      <p class="meta">GMB · Schema · Citations</p>
-    </article>
-    <article class="card span-4">
-      <h3>E-com Audits</h3>
-      <p><strong>Result:</strong> –22% CPA & +31% ROAS with testing framework.</p>
-      <p class="meta">GA4 · Hotjar · A/B</p>
-    </article>
-  </div>
-</section>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.152.2/build/three.min.js"></script>
+  <script>
+    // === Scene Setup ===
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(50, innerWidth / innerHeight, 0.1, 100);
+    camera.position.z = 4;
 
-<!-- SKILLS -->
-<section id="skills">
-  <h2>Skills</h2>
-  <p class="sub">Marketing strategy + code + automation.</p>
-  <div class="grid">
-    <div class="card span-4"><h3>Automation</h3><p class="meta">n8n · Apify · OpenAI</p></div>
-    <div class="card span-4"><h3>Web</h3><p class="meta">JavaScript · WordPress · Elementor</p></div>
-    <div class="card span-4"><h3>Growth</h3><p class="meta">SEO · Analytics · CRO</p></div>
-  </div>
-</section>
-
-<!-- CONTACT -->
-<section id="contact">
-  <h2>Let’s Work</h2>
-  <p class="sub">Open to freelance & collaborations.</p>
-  <p>Email: <a href="mailto:dineshbhairoju@gmail.com">dineshbhairoju@gmail.com</a> · LinkedIn: <a href="https://www.linkedin.com/in/" target="_blank" rel="noopener">Connect</a></p>
-</section>
-
-<footer>© <span id="year"></span> Dinesh Bhairoju · Built with Three.js on GitHub Pages</footer>
-
-<!-- Three.js -->
-<script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
-
-<script>
-  // ======= 3D Scene (animated glossy blob + starfield) =======
-  const cvs = document.getElementById('bg');
-  const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(60, innerWidth/innerHeight, 0.1, 100);
-  camera.position.set(0, 0, 6);
-
-  const renderer = new THREE.WebGLRenderer({ canvas: cvs, antialias: true, alpha: true });
-  renderer.setSize(innerWidth, innerHeight);
-  renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
-  renderer.outputColorSpace = THREE.SRGBColorSpace;
-
-  // Lights
-  const dir = new THREE.DirectionalLight(0xffffff, 1.0); dir.position.set(3,3,2);
-  const amb = new THREE.AmbientLight(0x9999ff, 0.6);
-  scene.add(dir, amb);
-
-  // ===== Earth group (planet + clouds + thin atmosphere) =====
-const earthGroup = new THREE.Group();
-scene.add(earthGroup);
-
-const loader = new THREE.TextureLoader();
-
-// Safe loaders (if a texture is missing, we skip that map gracefully)
-const earthMap   = loader.load('/assets/earth/earth_day.jpg');
-let bumpMap = null, specMap = null, cloudsMap = null;
-try { bumpMap   = loader.load('/assets/earth/earth_bump.jpg'); } catch(e){}
-try { specMap   = loader.load('/assets/earth/earth_spec.jpg'); } catch(e){}
-try { cloudsMap = loader.load('/assets/earth/earth_clouds.png'); } catch(e){}
-
-// Planet
-const earthGeom = new THREE.SphereGeometry(1.6, 64, 64);
-const earthMat  = new THREE.MeshPhongMaterial({
-  map: earthMap,
-  bumpMap: bumpMap || null,
-  bumpScale: bumpMap ? 0.25 : 0,
-  specularMap: specMap || null,
-  specular: specMap ? new THREE.Color(0x333333) : new THREE.Color(0x111111),
-  shininess: 18
-});
-const earth = new THREE.Mesh(earthGeom, earthMat);
-earth.rotation.z = THREE.MathUtils.degToRad(23.4); // axial tilt
-earthGroup.add(earth);
-
-// Clouds (slightly larger sphere)
-if (cloudsMap) {
-  const cloudsGeom = new THREE.SphereGeometry(1.62, 64, 64);
-  const cloudsMat  = new THREE.MeshLambertMaterial({
-    map: cloudsMap, transparent: true, opacity: 0.4, depthWrite: false
-  });
-  const clouds = new THREE.Mesh(cloudsGeom, cloudsMat);
-  clouds.name = 'clouds';
-  earthGroup.add(clouds);
-}
-
-// Simple atmospheric glow (inside-out sphere + additive)
-const atmGeom = new THREE.SphereGeometry(1.68, 64, 64);
-const atmMat  = new THREE.MeshBasicMaterial({
-  color: 0x6f5bff, transparent: true, opacity: 0.12,
-  side: THREE.BackSide, blending: THREE.AdditiveBlending
-});
-const atmosphere = new THREE.Mesh(atmGeom, atmMat);
-earthGroup.add(atmosphere);
-
-    const a = geo.attributes.position;
-    for(let i=0;i<a.count;i++){
-      const ix=i*3, iy=ix+1, iz=ix+2;
-      a.array[ix] = base[ix] * (1 + 0.03*Math.sin(t + ix*0.02));
-      a.array[iy] = base[iy] * (1 + 0.03*Math.cos(t*0.8 + iy*0.015));
-      a.array[iz] = base[iz] * (1 + 0.03*Math.sin(t*1.2 + iz*0.01));
-    }
-    a.needsUpdate = true; geo.computeVertexNormals();
-  }
-
-  // Starfield
-  const points = new Float32Array(600*3);
-  for(let i=0;i<600;i++){
-    points[i*3]   = (Math.random()-0.5)*22;
-    points[i*3+1] = (Math.random()-0.5)*16;
-    points[i*3+2] = (Math.random()-0.2)*-10 - 2;
-  }
-  const starGeo = new THREE.BufferGeometry();
-  starGeo.setAttribute('position', new THREE.BufferAttribute(points, 3));
-  const starMat = new THREE.PointsMaterial({ color:0xbba7ff, size:0.02, transparent:true, opacity:0.8 });
-  const stars = new THREE.Points(starGeo, starMat);
-  scene.add(stars);
-
-  // Mouse parallax
-  let mx=0,my=0, tx=0,ty=0;
-  addEventListener('pointermove', e=>{ mx=(e.clientX/innerWidth-0.5)*2; my=(e.clientY/innerHeight-0.5)*2; });
-
-  // Loop
-  let t = 0;
-function tick(){
-  t += 0.01;
-
-  // Spin the Earth gently
-  earth.rotation.y += 0.0008;
-
-  // Spin clouds a touch faster (if present)
-  const clouds = earthGroup.getObjectByName('clouds');
-  if (clouds) clouds.rotation.y += 0.001;
-
-  // Keep your existing parallax & stars
-  tx += (mx - tx) * 0.04;
-  ty += (my - ty) * 0.04;
-  camera.position.x = tx * 0.8;
-  camera.position.y = -ty * 0.6;
-  camera.lookAt(0, 0, 0);
-
-  stars.rotation.y += 0.0008;
-
-  renderer.render(scene, camera);
-  requestAnimationFrame(tick);
-}
-tick();
-
-
-  addEventListener('resize', ()=>{
-    camera.aspect = innerWidth/innerHeight; camera.updateProjectionMatrix();
+    const renderer = new THREE.WebGLRenderer({ antialias: true });
     renderer.setSize(innerWidth, innerHeight);
-    renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
-  });
+    document.body.appendChild(renderer.domElement);
 
-  // Fallback if WebGL not supported
-  if(!renderer.capabilities.isWebGL2 && !renderer.capabilities.isWebGL){
-    cvs.style.background = 'linear-gradient(135deg,#1a0137,#4c00ff)';
-  }
-</script>
+    // === Lights ===
+    const dir = new THREE.DirectionalLight(0xffffff, 1.2);
+    dir.position.set(5, 2, 5);
+    scene.add(dir);
 
-<!-- 3D tilt on avatar -->
-<script>
-  const avatar = document.querySelector('.avatar');
-  if (avatar){
-    addEventListener('mousemove', e=>{
-      const x = (innerWidth/2 - e.pageX)/50;
-      const y = (innerHeight/2 - e.pageY)/50;
-      avatar.style.transform = `rotateY(${x}deg) rotateX(${y}deg)`;
+    const ambient = new THREE.AmbientLight(0x404040, 0.6);
+    scene.add(ambient);
+
+    // === Stars background ===
+    const starsGeom = new THREE.BufferGeometry();
+    const starCount = 2000;
+    const starPositions = new Float32Array(starCount * 3);
+    for (let i = 0; i < starCount * 3; i++) {
+      starPositions[i] = (Math.random() - 0.5) * 100;
+    }
+    starsGeom.setAttribute('position', new THREE.BufferAttribute(starPositions, 3));
+    const starsMat = new THREE.PointsMaterial({ color: 0xffffff, size: 0.3 });
+    const stars = new THREE.Points(starsGeom, starsMat);
+    scene.add(stars);
+
+    // === Earth Group ===
+    const earthGroup = new THREE.Group();
+    scene.add(earthGroup);
+
+    // === Load Textures ===
+    const loader = new THREE.TextureLoader();
+    const earthDay   = loader.load('/assets/earth/earth_day.jpg');
+    const earthNight = loader.load('/assets/earth/earth_night.jpg');
+    const cloudsMap  = loader.load('/assets/earth/earth_clouds.png');
+
+    // === Day & Night Shader Material ===
+    const earthUniforms = {
+      uDay: { value: earthDay },
+      uNight: { value: earthNight },
+      uLightDir: { value: dir.position.clone().normalize() }
+    };
+
+    const earthMaterial = new THREE.ShaderMaterial({
+      uniforms: earthUniforms,
+      vertexShader: `
+        varying vec2 vUv;
+        varying vec3 vNormalW;
+        void main() {
+          vUv = uv;
+          vNormalW = normalize(mat3(modelMatrix) * normal);
+          gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+        }
+      `,
+      fragmentShader: `
+        varying vec2 vUv;
+        varying vec3 vNormalW;
+        uniform sampler2D uDay;
+        uniform sampler2D uNight;
+        uniform vec3 uLightDir;
+        void main() {
+          vec3 dayCol = texture2D(uDay, vUv).rgb;
+          vec3 nightCol = texture2D(uNight, vUv).rgb * 1.3;
+          float nl = dot(normalize(vNormalW), normalize(uLightDir));
+          float dayMix = smoothstep(-0.1, 0.3, nl);
+          vec3 col = mix(nightCol, dayCol, dayMix);
+          gl_FragColor = vec4(col, 1.0);
+        }
+      `
     });
-    addEventListener('mouseleave', ()=>{ avatar.style.transform = 'rotateY(0deg) rotateX(0deg)'; });
-  }
-</script>
 
-<!-- Typewriter -->
-<script>
-(function(){
-  const el = document.getElementById('typewriter'); if(!el) return;
-  const messages = ['AI Marketer','Web Developer','Automation Expert','SEO & Analytics','No-Code Builder (n8n, Apify)'];
-  const type=70, erase=45, hold=1100;
-  let i=0, j=0, typing=true;
-  function run(){
-    const s = messages[i];
-    if(typing){ j++; el.textContent = s.slice(0,j); if(j===s.length){ typing=false; return setTimeout(run,hold)} setTimeout(run,type); }
-    else{ j--; el.textContent = s.slice(0,j); if(j===0){ typing=true; i=(i+1)%messages.length; return setTimeout(run,300) } setTimeout(run,erase); }
-  }
-  run();
-})();
-document.getElementById('year').textContent = new Date().getFullYear();
-</script>
+    // === Earth Sphere ===
+    const earthGeom = new THREE.SphereGeometry(1.6, 64, 64);
+    const earth = new THREE.Mesh(earthGeom, earthMaterial);
+    earth.rotation.z = THREE.MathUtils.degToRad(23.4);
+    earthGroup.add(earth);
 
-<!-- JSON-LD -->
-<script type="application/ld+json">
-{
-  "@context":"https://schema.org",
-  "@type":"Person",
-  "name":"Dinesh Bhairoju",
-  "url":"https://dineshbhairoju.github.io/",
-  "image":"https://dineshbhairoju.github.io/dinesh.jpg",
-  "jobTitle":"Digital Marketer & Web Developer",
-  "email":"mailto:dineshbhairoju@gmail.com",
-  "sameAs":["https://github.com/dineshbhairoju","https://www.linkedin.com/in/"]
-}
-</script>
+    // === Clouds (optional layer) ===
+    const cloudsGeom = new THREE.SphereGeometry(1.62, 64, 64);
+    const cloudsMat = new THREE.MeshLambertMaterial({
+      map: cloudsMap,
+      transparent: true,
+      opacity: 0.4,
+      depthWrite: false
+    });
+    const clouds = new THREE.Mesh(cloudsGeom, cloudsMat);
+    earthGroup.add(clouds);
 
+    // === Atmosphere Glow ===
+    const atmGeom = new THREE.SphereGeometry(1.68, 64, 64);
+    const atmMat = new THREE.MeshBasicMaterial({
+      color: 0x6f5bff,
+      transparent: true,
+      opacity: 0.15,
+      side: THREE.BackSide,
+      blending: THREE.AdditiveBlending
+    });
+    const atmosphere = new THREE.Mesh(atmGeom, atmMat);
+    earthGroup.add(atmosphere);
+
+    // === Mouse Parallax ===
+    let mx = 0, my = 0, tx = 0, ty = 0;
+    document.addEventListener('pointermove', e => {
+      mx = (e.clientX / innerWidth - 0.5) * 2;
+      my = (e.clientY / innerHeight - 0.5) * 2;
+    });
+
+    // === Animation Loop ===
+    function tick() {
+      earth.rotation.y += 0.0008;
+      clouds.rotation.y += 0.001;
+      stars.rotation.y += 0.0005;
+
+      tx += (mx - tx) * 0.05;
+      ty += (my - ty) * 0.05;
+      camera.position.x = tx * 0.6;
+      camera.position.y = -ty * 0.4;
+      camera.lookAt(0, 0, 0);
+
+      renderer.render(scene, camera);
+      requestAnimationFrame(tick);
+    }
+    tick();
+
+    window.addEventListener('resize', () => {
+      camera.aspect = innerWidth / innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(innerWidth, innerHeight);
+    });
+  </script>
 </body>
 </html>
