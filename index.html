@@ -1,223 +1,94 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Dinesh Bhairoju — Portfolio</title>
-  <meta name="description" content="Dinesh Bhairoju — developer & digital innovator building modern, fast, human‑centered web experiences." />
-  <meta name="theme-color" content="#0b0b0f" />
-  <!-- Open Graph / Twitter -->
-  <meta property="og:title" content="Dinesh Bhairoju — Portfolio" />
-  <meta property="og:description" content="Developer & digital innovator. Selected projects, skills, and contact." />
-  <meta property="og:type" content="website" />
-  <meta property="og:image" content="/og-image.png" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <link rel="icon" href="/favicon.png" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dinesh Bhairoju – Portfolio</title>
+  <meta name="description" content="AI-first Digital Marketer & Web Developer. I create websites, automations, and marketing systems that grow brands." />
 
-  <!-- Tailwind (CDN) -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            bg: { 900: '#0b0b0f', 800: '#111217' },
-            brand: { 50:'#f5f3ff', 200:'#ddd6fe', 400:'#a78bfa', 500:'#8b5cf6', 600:'#7c3aed', 700:'#6d28d9' }
-          },
-          dropShadow: { glow: '0 0 25px rgba(139,92,246,0.45)' },
-          boxShadow: {
-            glass: '0 1px 0 rgba(255,255,255,0.06) inset, 0 0 0 1px rgba(255,255,255,0.06), 0 10px 30px rgba(0,0,0,0.3)'
-          }
-        }
-      }
-    }
-  </script>
   <style>
-    html{scroll-behavior:smooth}
-    .fade{animation:fade .6s ease-out both}
-    @keyframes fade{from{opacity:.0;transform:translateY(10px)}to{opacity:1;transform:none}}
-    .shine{position:relative;overflow:hidden}
-    .shine:before{content:'';position:absolute;inset:-100% auto auto -100%;width:60%;height:200%;transform:rotate(25deg);background:linear-gradient(90deg,transparent,rgba(255,255,255,.12),transparent);animation:shine 3.6s ease-in-out infinite}
-    @keyframes shine{50%{inset:-100% auto auto 140%}}
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: linear-gradient(135deg, #1a0137, #4c00ff);
+      color: white;
+      text-align: center;
+    }
+
+    header {
+      padding: 80px 20px 40px;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+    }
+
+    p {
+      font-size: 1.1rem;
+      color: #d9cfff;
+      line-height: 1.6;
+    }
+
+    a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .btn {
+      display: inline-block;
+      margin-top: 20px;
+      background: #8a63f9;
+      color: white;
+      padding: 12px 28px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      background: #a177ff;
+    }
+
+    section {
+      padding: 60px 20px;
+      background: #100224;
+    }
+
+    footer {
+      background: #0a0118;
+      padding: 20px;
+      color: #b8aefc;
+      font-size: 0.9rem;
+    }
   </style>
 </head>
-<body class="bg-bg-900 text-neutral-100 selection:bg-brand-600/40">
-  <!-- Header -->
-  <header class="sticky top-0 z-40 border-b border-white/10 backdrop-blur bg-gradient-to-b from-bg-900/90 to-bg-900/50">
-    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
-      <a href="#home" class="font-semibold tracking-tight">Dinesh Bhairoju</a>
-      <nav class="hidden md:flex gap-6 text-sm text-neutral-300">
-        <a href="#about" class="hover:text-white">About</a>
-        <a href="#projects" class="hover:text-white">Projects</a>
-        <a href="#skills" class="hover:text-white">Skills</a>
-        <a href="#contact" class="hover:text-white">Contact</a>
-      </nav>
-      <a href="#contact" class="hidden sm:inline-flex px-4 py-2 rounded-xl bg-white/10 hover:bg-white/15 border border-white/10 text-sm">Hire Me</a>
-    </div>
+<body>
+
+  <header>
+    <h1>Hi, I’m <span style="color:#b48cff;">Dinesh Bhairoju</span></h1>
+    <p>AI-first Digital Marketer & Web Developer — I build automation workflows, SEO strategies, and growth systems for brands.</p>
+    <a href="#projects" class="btn">See My Work ↓</a>
   </header>
 
-  <!-- Hero -->
-  <section id="home" class="relative overflow-hidden">
-    <div class="absolute inset-0 pointer-events-none bg-[radial-gradient(70%_60%_at_50%_-10%,rgba(124,58,237,.25),transparent_60%)]"></div>
-    <div class="max-w-6xl mx-auto px-4 pt-16 pb-20 grid lg:grid-cols-2 gap-10 items-center">
-      <div class="fade">
-        <p class="text-xs uppercase tracking-[0.25em] text-neutral-400">Portfolio</p>
-        <h1 class="text-4xl sm:text-5xl font-bold leading-tight mt-3">Hi, I'm <span class="text-brand-400 drop-shadow-glow">Dinesh Bhairoju</span></h1>
-        <p class="mt-4 text-neutral-300 max-w-prose">Developer & digital innovator crafting modern, fast, human‑centered web experiences. I blend front‑end engineering with automation to ship results quickly and cleanly.</p>
-        <div class="mt-6 flex flex-wrap gap-3">
-          <a href="#projects" class="px-5 py-3 rounded-xl bg-brand-600 hover:bg-brand-500 border border-brand-400/30 shine">See My Work</a>
-          <a href="/Dinesh_Bhairoju_Resume.pdf" class="px-5 py-3 rounded-xl bg-white/10 hover:bg-white/15 border border-white/10">Download Resume</a>
-        </div>
-        <div class="mt-4 text-xs text-neutral-400 flex flex-wrap items-center gap-3">
-          <span class="inline-flex items-center gap-2"><span class="h-1.5 w-1.5 rounded-full bg-emerald-400"></span>Available for projects</span>
-          <span>Hyderabad, India</span>
-        </div>
-      </div>
-      <div class="relative fade">
-        <div class="relative fade">
-  <img src="fed41148-60cd-44f6-bd9a-558e5aa41782.jpg" alt="Dinesh Bhairoju" class="rounded-2xl border border-white/10 shadow-glass w-full object-cover" />
-</div>
-      </div>
-    </div>
+  <section id="projects">
+    <h2>🚀 Featured Projects</h2>
+    <p><strong>1. AI Workflow Automation:</strong> Built a no-code automation using n8n + Apify to generate qualified startup leads.</p>
+    <p><strong>2. Digital Marketing Dashboard:</strong> Created live analytics reporting in Google Sheets powered by GPT automation.</p>
   </section>
 
-  <!-- Projects -->
-  <section id="projects" class="py-16 border-t border-white/10">
-    <div class="max-w-6xl mx-auto px-4">
-      <div class="flex items-end justify-between mb-6">
-        <h2 class="text-3xl font-semibold">Selected Projects</h2>
-        <a href="#contact" class="text-sm text-brand-400 hover:text-brand-200">Start a project →</a>
-      </div>
-      <div class="grid md:grid-cols-3 gap-6">
-        <!-- Card template: duplicate and edit -->
-        <article class="rounded-2xl border border-white/10 bg-bg-800/60 backdrop-blur p-5 shadow-glass hover:translate-y-[-2px] transition">
-          <div class="text-xs text-neutral-400">Website • 2025</div>
-          <h3 class="mt-1 font-semibold text-lg">Modern Portfolio</h3>
-          <p class="text-neutral-300 text-sm mt-1">Tailwind + GitHub Pages. Shipped in one day with SEO and contact form.</p>
-          <div class="mt-3 flex flex-wrap gap-2 text-xs">
-            <span class="px-2 py-1 rounded-lg bg-white/5 border border-white/10">HTML</span>
-            <span class="px-2 py-1 rounded-lg bg-white/5 border border-white/10">Tailwind</span>
-            <span class="px-2 py-1 rounded-lg bg-white/5 border border-white/10">SEO</span>
-          </div>
-        </article>
-
-        <article class="rounded-2xl border border-white/10 bg-bg-800/60 backdrop-blur p-5 shadow-glass hover:translate-y-[-2px] transition">
-          <div class="text-xs text-neutral-400">Automation • 2025</div>
-          <h3 class="mt-1 font-semibold text-lg">n8n Lead Pipeline</h3>
-          <p class="text-neutral-300 text-sm mt-1">Scraped startup leads → cleaned → synced to Sheets → alerts on Telegram.</p>
-          <div class="mt-3 flex flex-wrap gap-2 text-xs">
-            <span class="px-2 py-1 rounded-lg bg-white/5 border border-white/10">n8n</span>
-            <span class="px-2 py-1 rounded-lg bg-white/5 border border-white/10">Google Sheets</span>
-            <span class="px-2 py-1 rounded-lg bg-white/5 border border-white/10">OpenAI</span>
-          </div>
-        </article>
-
-        <article class="rounded-2xl border border-white/10 bg-bg-800/60 backdrop-blur p-5 shadow-glass hover:translate-y-[-2px] transition">
-          <div class="text-xs text-neutral-400">Analytics • 2024</div>
-          <h3 class="mt-1 font-semibold text-lg">Marketing Dashboard</h3>
-          <p class="text-neutral-300 text-sm mt-1">Real-time performance view with GA4 + Meta Ads for executive decisions.</p>
-          <div class="mt-3 flex flex-wrap gap-2 text-xs">
-            <span class="px-2 py-1 rounded-lg bg-white/5 border border-white/10">GA4</span>
-            <span class="px-2 py-1 rounded-lg bg-white/5 border border-white/10">BigQuery</span>
-            <span class="px-2 py-1 rounded-lg bg-white/5 border border-white/10">Looker</span>
-          </div>
-        </article>
-      </div>
-    </div>
+  <section id="contact">
+    <h2>📩 Contact Me</h2>
+    <p>Want to collaborate or hire me for a project?</p>
+    <p>Email: <a href="mailto:dineshbhairoju@gmail.com">dineshbhairoju@gmail.com</a></p>
+    <a href="https://www.linkedin.com/in/YOUR-LINKEDIN-HANDLE/" class="btn" target="_blank">Connect on LinkedIn</a>
   </section>
 
-  <!-- About -->
-  <section id="about" class="py-16 border-t border-white/10">
-    <div class="max-w-6xl mx-auto px-4 grid md:grid-cols-2 gap-10 items-start">
-      <div>
-        <h2 class="text-3xl font-semibold">About</h2>
-        <p class="mt-4 text-neutral-300 leading-relaxed">I build crisp interfaces and automate the boring bits. Comfortable across product, code, and growth. Obsessed with speed, accessibility, and clean systems.</p>
-        <div class="mt-6 grid sm:grid-cols-3 gap-4">
-          <div class="rounded-xl border border-white/10 bg-bg-800/60 p-4 text-center"><div class="text-2xl font-semibold">10+</div><div class="text-xs text-neutral-400 mt-1">Projects</div></div>
-          <div class="rounded-xl border border-white/10 bg-bg-800/60 p-4 text-center"><div class="text-2xl font-semibold">5</div><div class="text-xs text-neutral-400 mt-1">Industries</div></div>
-          <div class="rounded-xl border border-white/10 bg-bg-800/60 p-4 text-center"><div class="text-2xl font-semibold">3 yrs</div><div class="text-xs text-neutral-400 mt-1">Experience</div></div>
-        </div>
-      </div>
-      <div>
-        <h3 class="text-lg font-semibold">Experience</h3>
-        <ol class="mt-4 space-y-4">
-          <li class="rounded-xl border border-white/10 bg-bg-800/60 p-4">
-            <div class="flex items-center justify-between">
-              <span class="font-medium">Role @ Company</span>
-              <span class="text-xs text-neutral-400">2024 — Present</span>
-            </div>
-            <p class="text-sm text-neutral-300 mt-1">Impact line: what you owned and measurable outcomes.</p>
-          </li>
-          <li class="rounded-xl border border-white/10 bg-bg-800/60 p-4">
-            <div class="flex items-center justify-between">
-              <span class="font-medium">Role @ Company</span>
-              <span class="text-xs text-neutral-400">2022 — 2024</span>
-            </div>
-            <p class="text-sm text-neutral-300 mt-1">Features shipped, growth delivered, or systems built.</p>
-          </li>
-        </ol>
-      </div>
-    </div>
-  </section>
-
-  <!-- Skills -->
-  <section id="skills" class="py-16 border-t border-white/10">
-    <div class="max-w-6xl mx-auto px-4">
-      <h2 class="text-3xl font-semibold">Skills</h2>
-      <div class="mt-6 flex flex-wrap gap-2">
-        <span class="px-3 py-1.5 rounded-xl bg-white/5 border border-white/10 text-sm">HTML</span>
-        <span class="px-3 py-1.5 rounded-xl bg-white/5 border border-white/10 text-sm">CSS / Tailwind</span>
-        <span class="px-3 py-1.5 rounded-xl bg-white/5 border border-white/10 text-sm">JavaScript</span>
-        <span class="px-3 py-1.5 rounded-xl bg-white/5 border border-white/10 text-sm">n8n</span>
-        <span class="px-3 py-1.5 rounded-xl bg-white/5 border border-white/10 text-sm">GA4</span>
-        <span class="px-3 py-1.5 rounded-xl bg-white/5 border border-white/10 text-sm">SEO</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- Contact -->
-  <section id="contact" class="py-16 border-t border-white/10">
-    <div class="max-w-6xl mx-auto px-4 grid md:grid-cols-2 gap-10 items-start">
-      <div>
-        <h2 class="text-3xl font-semibold">Let’s build something</h2>
-        <p class="mt-3 text-neutral-300">Email: <a class="text-brand-400 hover:text-brand-200" href="mailto:dineshcharydinu@gmail.com">dineshcharydinu@gmail.com</a></p>
-        <div class="mt-3 flex gap-4 text-neutral-300">
-          <!-- Social icons (replace # with links) -->
-          <a href="#" aria-label="LinkedIn" class="hover:text-white" title="LinkedIn">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5C4.98 4.88 3.86 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.5 8h4V24h-4V8zm7.5 0h3.8v2.2h.1c.5-1 1.8-2.2 3.7-2.2 4 0 4.7 2.6 4.7 6V24h-4v-7.2c0-1.7 0-3.8-2.3-3.8-2.3 0-2.7 1.8-2.7 3.7V24h-4V8z"/></svg>
-          </a>
-          <a href="#" aria-label="GitHub" class="hover:text-white" title="GitHub">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.73.5.98 5.24.98 11.5c0 4.85 3.15 8.96 7.52 10.41.55.1.75-.24.75-.53v-1.86c-3.06.66-3.7-1.31-3.7-1.31-.5-1.26-1.22-1.6-1.22-1.6-.99-.67.08-.66.08-.66 1.1.08 1.69 1.12 1.69 1.12.98 1.68 2.57 1.19 3.2.9.1-.71.38-1.19.68-1.46-2.44-.28-5-1.22-5-5.42 0-1.2.43-2.17 1.12-2.93-.11-.28-.49-1.42.1-2.96 0 0 .92-.3 3.02 1.12.87-.24 1.8-.36 2.72-.36.92 0 1.85.12 2.72.36 2.1-1.42 3.02-1.12 3.02-1.12.59 1.54.21 2.68.1 2.96.69.76 1.12 1.73 1.12 2.93 0 4.21-2.57 5.13-5.02 5.41.39.33.73.99.73 2v2.96c0 .29.2.64.75.53 4.37-1.45 7.52-5.55 7.52-10.41C23.02 5.24 18.27.5 12 .5z"/></svg>
-          </a>
-          <a href="#" aria-label="Twitter" class="hover:text-white" title="Twitter/X">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M18.9 2H22l-7.6 8.7L23.3 22h-6.2l-4.9-6.3L6.5 22H2.4l8.3-9.5L1.3 2h6.3l4.4 5.8L18.9 2zm-1.1 18h1.7L8.3 4H6.5l11.3 16z"/></svg>
-          </a>
-        </div>
-      </div>
-      <form class="rounded-2xl border border-white/10 bg-bg-800/60 backdrop-blur p-5 grid gap-4 shadow-glass" action="https://formspree.io/f/your-id" method="POST">
-        <input required name="name" placeholder="Your name" class="px-4 py-3 rounded-xl bg-white/5 border border-white/10 outline-none focus:border-brand-400" />
-        <input required type="email" name="email" placeholder="Email" class="px-4 py-3 rounded-xl bg-white/5 border border-white/10 outline-none focus:border-brand-400" />
-        <textarea required name="message" rows="5" placeholder="Tell me about your project..." class="px-4 py-3 rounded-xl bg-white/5 border border-white/10 outline-none focus:border-brand-400"></textarea>
-        <button class="px-5 py-3 rounded-xl bg-brand-600 hover:bg-brand-500 border border-brand-400/30 shine" type="submit">Send</button>
-        <p class="text-xs text-neutral-500">Replace the action URL with your Formspree ID to receive messages.</p>
-      </form>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer class="py-10 border-t border-white/10">
-    <div class="max-w-6xl mx-auto px-4 text-sm text-neutral-400 flex flex-col sm:flex-row items-center justify-between gap-2">
-      <p>© <span id="year"></span> Dinesh Bhairoju. All rights reserved.</p>
-      <p>Built with Tailwind • Hosted on GitHub Pages</p>
-    </div>
+  <footer>
+    <p>© 2025 Dinesh Bhairoju · Built with ❤️ using GitHub Pages</p>
   </footer>
 
-  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
-  <!-- GA4 (optional) — replace G-XXXX with your ID -->
-  <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXX"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-XXXX');
-  </script> -->
 </body>
 </html>
