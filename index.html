@@ -41,7 +41,20 @@
     background:linear-gradient(180deg, rgba(12,12,20,.65), rgba(12,12,20,.15));
     border-bottom:1px solid var(--glass-b);
   }
-  .brand{font-weight:800; letter-spacing:.3px}
+  .brand {
+  font-weight: 800;
+  letter-spacing: .3px;
+  font-size: 22px;
+  padding-left: 10px;
+  white-space: nowrap; /* prevents name break */
+  color: #fff;
+}
+
+.brand span {
+  color: var(--accent);
+  margin: 0 4px;
+}
+
   .brand span{color:var(--accent)}
   .nav a{color:var(--fg); text-decoration:none; font-weight:600; padding:8px 10px; border-radius:10px}
   .nav a:hover{background:var(--glass)}
