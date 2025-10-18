@@ -1,94 +1,48 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dinesh Bhairoju – Portfolio</title>
-  <meta name="description" content="AI-first Digital Marketer & Web Developer. I create websites, automations, and marketing systems that grow brands." />
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, Helvetica, sans-serif;
-      background: linear-gradient(135deg, #1a0137, #4c00ff);
-      color: white;
-      text-align: center;
-    }
+<title>Dinesh Bhairoju — 3D Portfolio</title>
+<meta name="description" content="AI-first Digital Marketer & Web Developer. 3D portfolio with automation, SEO, and modern web builds." />
 
-    header {
-      padding: 80px 20px 40px;
-    }
+<!-- SEO / Share -->
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Dinesh Bhairoju — 3D Portfolio" />
+<meta property="og:description" content="AI-first Digital Marketer & Web Developer. 3D portfolio with automation, SEO, and modern web builds." />
+<meta property="og:image" content="https://dineshbhairoju.github.io/cover.jpg" />
+<meta property="og:url" content="https://dineshbhairoju.github.io/" />
+<meta name="twitter:card" content="summary_large_image" />
 
-    h1 {
-      font-size: 2.5rem;
-      margin-bottom: 10px;
-    }
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet" />
 
-    p {
-      font-size: 1.1rem;
-      color: #d9cfff;
-      line-height: 1.6;
-    }
+<style>
+  :root{
+    --bg:#0b0b12;
+    --fg:#eaeaf2;
+    --muted:#a7a7be;
+    --accent:#8a63f9;
+    --accent-2:#a07bff;
+    --card:#13131a;
+    --glass:rgba(255,255,255,.06);
+    --glass-border:rgba(255,255,255,.12);
+  }
 
-    a {
-      color: #fff;
-      text-decoration: none;
-      font-weight: bold;
-    }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0;
+    font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+    color:var(--fg);
+    background:
+      radial-gradient(1200px 800px at 10% -10%, #2a1559 0%, transparent 60%),
+      radial-gradient(1000px 600px at 110% 10%, #1a1142 0%, transparent 65%),
+      var(--bg);
+    overflow-x:hidden;
+  }
 
-    .btn {
-      display: inline-block;
-      margin-top: 20px;
-      background: #8a63f9;
-      color: white;
-      padding: 12px 28px;
-      border-radius: 30px;
-      text-decoration: none;
-      font-weight: bold;
-      transition: 0.3s;
-    }
-
-    .btn:hover {
-      background: #a177ff;
-    }
-
-    section {
-      padding: 60px 20px;
-      background: #100224;
-    }
-
-    footer {
-      background: #0a0118;
-      padding: 20px;
-      color: #b8aefc;
-      font-size: 0.9rem;
-    }
-  </style>
-</head>
-<body>
-
-  <header>
-    <h1>Hi, I’m <span style="color:#b48cff;">Dinesh Bhairoju</span></h1>
-    <p>AI-first Digital Marketer & Web Developer — I build automation workflows, SEO strategies, and growth systems for brands.</p>
-    <a href="#projects" class="btn">See My Work ↓</a>
-  </header>
-
-  <section id="projects">
-    <h2>🚀 Featured Projects</h2>
-    <p><strong>1. AI Workflow Automation:</strong> Built a no-code automation using n8n + Apify to generate qualified startup leads.</p>
-    <p><strong>2. Digital Marketing Dashboard:</strong> Created live analytics reporting in Google Sheets powered by GPT automation.</p>
-  </section>
-
-  <section id="contact">
-    <h2>📩 Contact Me</h2>
-    <p>Want to collaborate or hire me for a project?</p>
-    <p>Email: <a href="mailto:dineshbhairoju@gmail.com">dineshbhairoju@gmail.com</a></p>
-    <a href="https://www.linkedin.com/in/YOUR-LINKEDIN-HANDLE/" class="btn" target="_blank">Connect on LinkedIn</a>
-  </section>
-
-  <footer>
-    <p>© 2025 Dinesh Bhairoju · Built with ❤️ using GitHub Pages</p>
-  </footer>
-
-</body>
-</html>
+  /* 3D Canvas fills the hero*
