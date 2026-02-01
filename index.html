@@ -1,82 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Meta Pixel Code -->
-<script>
-!function(f,b,e,v,n,t,s)
-{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s)}(window, document,'script',
-'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '2082594762147057');
-fbq('track', 'PageView');
-</script>
-<noscript><img height="1" width="1" style="display:none"
-src="https://www.facebook.com/tr?id=2082594762147057&ev=PageView&noscript=1"
-/></noscript>
-<!-- End Meta Pixel Code -->
-
-  <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-37664Q2CW6"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-37664Q2CW6');
-</script>
-  <!-- SEO Essentials -->
-<meta name="title" content="Dinesh Bhairoju — AI-first Digital Marketer & Web Developer" />
-<meta name="description" content="AI-first marketer & web developer. I build automations, SEO systems, and creative web experiences that drive measurable growth." />
-<meta name="keywords" content="Dinesh Bhairoju, AI marketing, SEO expert, web developer, automation, digital marketing" />
-
-<!-- Open Graph / Facebook -->
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://dineshbhairoju.github.io/" />
-<meta property="og:title" content="Dinesh Bhairoju — AI-first Digital Marketer & Web Developer" />
-<meta property="og:description" content="AI-first marketer & web developer. I build automations, SEO systems, and creative web experiences that drive measurable growth." />
-<meta property="og:image" content="https://dineshbhairoju.github.io/dinesh.jpg" />
-
-<!-- Twitter -->
-<meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:url" content="https://dineshbhairoju.github.io/" />
-<meta property="twitter:title" content="Dinesh Bhairoju — AI-first Digital Marketer & Web Developer" />
-<meta property="twitter:description" content="AI-first marketer & web developer. I build automations, SEO systems, and creative web experiences that drive measurable growth." />
-<meta property="twitter:image" content="https://dineshbhairoju.github.io/dinesh.jpg" />
-
-  <meta name="google-site-verification" content="VXDgK-Y-_6lq_xon8KrlUNYYhPI36T7G5qqVG-kEGCo" />
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Dinesh Bhairoju — AI-first Marketer & Web Developer</title>
-  <style>
-    
-  .mode-switch {
-    margin-top: 10px;
-  }
-  .mini {
-    margin: 0 6px;
-    padding: 8px 14px;
-    border-radius: 9999px;
-    background: rgba(255,255,255,.08);
-    border: 1px solid rgba(255,255,255,.2);
-    color: #fff;
-    cursor: pointer;
-    font-weight: 600;
-    transition: 0.2s;
-  }
-  .mini:hover {
-    transform: translateY(-1px);
-  }
-  .mini.active {
-    background: linear-gradient(90deg, var(--accent), var(--accent2));
-  }
-</style>
+  <title>Dinesh Bhairoju — Digital Marketing & Ecommerce</title>
 
-    
-  <meta name="description" content="Dinesh Bhairoju — AI-first Digital Marketer & Web Developer. Automations, SEO, and modern websites that drive measurable growth." />
+  <!-- SEO -->
+  <meta name="description" content="Digital Marketing & Ecommerce specialist focused on SEO, analytics, automation, and high-performance websites." />
+  <meta name="keywords" content="Dinesh Bhairoju, Digital Marketing, Ecommerce, SEO, GA4, Web Analytics" />
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -90,392 +21,283 @@ src="https://www.facebook.com/tr?id=2082594762147057&ev=PageView&noscript=1"
       --bg:#000;
     }
     *{box-sizing:border-box}
-    html,body{height:100%}
     body{
-      margin:0; color:#fff; background:#000; font-family:Poppins,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu;
+      margin:0;
+      font-family:Poppins,system-ui;
+      background:#000;
+      color:#fff;
       overflow-x:hidden;
-      padding-top:72px; /* space for fixed header */
+      padding-top:72px;
     }
 
-    /* ========== Header / Nav ========== */
+    /* Header */
     header{
-      position:fixed; top:0; left:0; right:0; height:72px;
-      display:flex; align-items:center; justify-content:space-between;
-      padding:0 28px; z-index:20;
-      background:rgba(0,0,0,.45); backdrop-filter:blur(12px);
+      position:fixed;
+      top:0; left:0; right:0;
+      height:72px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:0 28px;
+      background:rgba(0,0,0,.5);
+      backdrop-filter:blur(12px);
       border-bottom:1px solid rgba(255,255,255,.06);
+      z-index:20;
     }
-    .brand{font-weight:800; font-size:22px; white-space:nowrap}
+    .brand{font-size:22px;font-weight:800}
     .brand span{color:var(--accent)}
     nav a{
-      color:#fff; text-decoration:none; margin-left:24px; font-weight:500;
-      opacity:.9; transition:.2s;
+      margin-left:22px;
+      text-decoration:none;
+      color:#fff;
+      font-weight:500;
+      opacity:.9;
     }
     nav a:hover{color:var(--accent)}
 
-    /* ========== Canvas (3D behind) ========== */
+    /* Canvas */
     canvas#bg{
-      position:fixed; inset:0; width:100%; height:100%; z-index:-1; display:block;
+      position:fixed;
+      inset:0;
+      z-index:-1;
       background:radial-gradient(ellipse at 50% -20%, #0b0226 0%, #000 60%);
     }
 
-    /* ========== Hero ========== */
-    section.hero{
-      min-height:72vh; display:grid; place-items:center; text-align:center; position:relative; z-index:10;
+    /* Hero */
+    .hero{
+      min-height:70vh;
+      display:grid;
+      place-items:center;
+      text-align:center;
       padding:40px 18px;
     }
     .avatar{
-      width:128px; height:128px; object-fit:cover; border-radius:50%;
+      width:130px;
+      height:130px;
+      border-radius:50%;
       border:3px solid rgba(255,255,255,.25);
-      box-shadow:0 0 26px rgba(155,93,255,.45);
+      box-shadow:0 0 24px rgba(155,93,255,.4);
       margin-bottom:20px;
     }
-    h1{margin:10px 0 12px; font-size:clamp(32px,6vw,56px); line-height:1.15; font-weight:800}
-    h1 .accent{color:var(--accent)}
+    h1{
+      font-size:clamp(32px,6vw,56px);
+      font-weight:800;
+      margin:0 0 12px;
+    }
+    h1 span{color:var(--accent)}
     .sub{
-      color:#cfcfe9; opacity:.92; max-width:780px; margin:0 auto 22px; line-height:1.65; font-size:clamp(14px,2.2vw,18px);
+      max-width:760px;
+      margin:0 auto 24px;
+      color:#cfcfe9;
+      line-height:1.6;
     }
     .cta{
-      display:inline-block; padding:12px 26px; border-radius:9999px; font-weight:700; text-decoration:none;
-      color:#fff; background:linear-gradient(90deg,var(--accent),var(--accent2));
-      box-shadow:0 10px 24px rgba(155,93,255,.35); transition:.2s;
-    }
-    .cta:hover{transform:translateY(-1px); box-shadow:0 12px 28px rgba(155,93,255,.45)}
-
-    /* subtle darkener behind hero text for readability */
-    .hero::before{
-      content:""; position:absolute; inset:0; z-index:-1;
-      background:radial-gradient(circle at 50% 40%, rgba(0,0,0,.35), transparent 60%);
+      padding:12px 26px;
+      border-radius:999px;
+      background:linear-gradient(90deg,var(--accent),var(--accent2));
+      color:#fff;
+      text-decoration:none;
+      font-weight:700;
+      box-shadow:0 10px 26px rgba(155,93,255,.35);
     }
 
-    /* ========== Sections ========== */
-    .section{position:relative; z-index:10; padding:96px 20px; text-align:center}
-    .section h2{font-size:clamp(28px,4.4vw,40px); margin:0 0 26px; color:#d7c6ff}
+    /* Sections */
+    .section{
+      padding:96px 20px;
+      text-align:center;
+      position:relative;
+      z-index:10;
+    }
     .section.dark{background:rgba(255,255,255,.04)}
+    h2{
+      font-size:clamp(28px,4vw,40px);
+      color:#d7c6ff;
+      margin-bottom:26px;
+    }
 
-    .projects-grid{
-      display:flex; gap:28px; flex-wrap:wrap; justify-content:center; align-items:stretch; max-width:1100px; margin:0 auto;
+    /* About */
+    .about{
+      max-width:900px;
+      margin:auto;
+      line-height:1.7;
+      color:#ddd;
+    }
+
+    /* Projects */
+    .projects{
+      display:flex;
+      flex-wrap:wrap;
+      gap:26px;
+      justify-content:center;
+      max-width:1100px;
+      margin:auto;
     }
     .card{
-      width:min(320px,90vw); background:rgba(255,255,255,.05);
-      border:1px solid rgba(255,255,255,.08); border-radius:18px; padding:22px; text-align:left;
+      width:min(320px,90vw);
+      background:rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.1);
+      border-radius:18px;
+      padding:22px;
+      text-align:left;
       box-shadow:0 10px 30px rgba(0,0,0,.35);
     }
     .card h3{margin:0 0 8px}
-    .card p{color:#ddd; font-size:15px; line-height:1.6}
-    .card .btn{margin-top:14px}
+    .card p{font-size:15px;color:#ddd}
 
-    .btn{
-      display:inline-block; padding:10px 18px; border-radius:9999px; text-decoration:none; color:#fff;
-      background:linear-gradient(90deg,var(--accent),var(--accent2)); transition:.2s;
-    }
-    .btn:hover{transform:translateY(-1px)}
-
+    /* Skills */
     .skills{
-      display:flex; flex-wrap:wrap; gap:14px; justify-content:center; max-width:900px; margin:0 auto;
+      display:flex;
+      flex-wrap:wrap;
+      gap:14px;
+      justify-content:center;
+      max-width:900px;
+      margin:auto;
     }
     .skills span{
-      padding:10px 16px; border-radius:9999px; background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.1);
+      padding:10px 16px;
+      border-radius:999px;
+      background:rgba(255,255,255,.08);
+      border:1px solid rgba(255,255,255,.12);
     }
 
     footer{
-      text-align:center; padding:42px 12px; color:#a7a7b7; background:rgba(0,0,0,.6); border-top:1px solid rgba(255,255,255,.06)
+      padding:42px 12px;
+      text-align:center;
+      color:#aaa;
+      background:rgba(0,0,0,.6);
+      border-top:1px solid rgba(255,255,255,.06);
     }
-    footer a{color:#cdb7ff; text-decoration:none}
+    footer a{color:#cdb7ff;text-decoration:none}
   </style>
 </head>
+
 <body>
 
-  <!-- Fixed header -->
-  <header>
-    <div class="brand">Dinesh<span>•</span>Bhairoju</div>
-    <nav>
-      <a href="#projects">Work</a>
-      <a href="#skills">Skills</a>
-      <a href="#contact">Contact</a>
-    </nav>
-  </header>
+<header>
+  <div class="brand">Dinesh<span>•</span>Bhairoju</div>
+  <nav>
+    <a href="#about">About</a>
+    <a href="#projects">Work</a>
+    <a href="#skills">Skills</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
 
-  <!-- 3D background -->
-  <canvas id="bg"></canvas>
+<canvas id="bg"></canvas>
 
-  <!-- HERO -->
-  <section class="hero" id="home">
-    <div>
-      <img src="dinesh.jpg" alt="Dinesh Bhairoju" class="avatar" />
-      <h1>Hey, I'm <span class="accent">Dinesh Bhairoju</span></h1>
-      <p class="sub">AI-first Digital Marketer & Web Developer — I design automations, websites, and SEO systems that drive measurable growth.</p>
-      <a class="cta" href="#projects">See Projects ↓</a>
-     
-      <div class="mode-switch">
-  <button id="toggleMode" class="mini">Night 🌙</button>
-  <button id="autoMode" class="mini">Auto ⟳</button>
-</div>
+<section class="hero">
+  <div>
+    <img src="dinesh.jpg" class="avatar" alt="Dinesh Bhairoju">
+    <h1>Hi, I'm <span>Dinesh</span></h1>
+    <p class="sub">
+      Digital Marketing & Ecommerce specialist focused on SEO, analytics, automation,
+      and building high-performance websites that drive measurable growth.
+    </p>
+    <a href="#projects" class="cta">View Work ↓</a>
+  </div>
+</section>
 
+<section id="about" class="section dark">
+  <h2>About Me</h2>
+  <p class="about">
+    I work at the intersection of digital marketing and ecommerce, helping brands
+    improve visibility, performance, and conversions. My focus is on SEO, analytics,
+    automation, and clean web experiences backed by data-driven decisions.
+  </p>
+</section>
+
+<section id="projects" class="section">
+  <h2>Ecommerce & Marketing Projects</h2>
+  <div class="projects">
+    <div class="card">
+      <h3>Ecommerce SEO Optimization</h3>
+      <p>Improved site structure, on-page SEO, and tracking using GA4 and Search Console
+         to enhance organic visibility and performance.</p>
     </div>
-  </section>
-
-  <!-- PROJECTS -->
-  <section id="projects" class="section">
-    <h2>🚀 Featured Projects</h2>
-    <div class="projects-grid">
-      <article class="card">
-        <h3>Business Development excutive</h3>
-        <p>End-to-end digital growth systems using AI. Funnels, SEO at scale, and automation orchestration.</p>
-        <a class="btn" href="https://" target="_blank" rel="noopener">Visit</a>
-      </article>
-      <article class="card">
-        <h3>Market Research analyst</h3>
-        <p>On-demand tailoring marketplace. Optimized onboarding, notifications, and analytics loops.</p>
-        <a class="btn" href="https://" target="_blank" rel="noopener">Visit</a>
-      </article>
-      <article class="card">
-        <h3>IT Sales</h3>
-        <p>Premium skincare storefront with conversion-focused storytelling and automated email flows.</p>
-        <a class="btn" href="https://" target="_blank" rel="noopener">Visit</a>
-      </article>
+    <div class="card">
+      <h3>Analytics & Conversion Tracking</h3>
+      <p>Implemented event tracking, funnels, and performance dashboards to understand
+         user behavior and optimize conversions.</p>
     </div>
-  </section>
-
-  <!-- SKILLS -->
-  <section id="skills" class="section dark">
-    <h2>💡 Skills & Tools</h2>
-    <div class="skills">
-      <span>AI Automation</span><span>Web Development</span><span>SEO & AEO</span>
-      <span>UI/UX</span><span>Performance Marketing</span><span>IT Sales</span>
+    <div class="card">
+      <h3>High-Performance Website</h3>
+      <p>Built fast, mobile-first websites with optimized assets, clean UI, and strong
+         technical SEO foundations.</p>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- CONTACT -->
-  <section id="contact" class="section">
-    <h2>📬 Get In Touch</h2>
-    <p class="sub" style="margin-bottom:18px">Have a project in mind? Let’s create something measurable together.</p>
-    <a class="cta" href="mailto:dineshcharydinu@gmail.com">Send Email</a>
-  </section>
+<section id="skills" class="section dark">
+  <h2>Skills & Tools</h2>
+  <div class="skills">
+    <span>SEO (On-page & Technical)</span>
+    <span>Google Analytics 4</span>
+    <span>Google Search Console</span>
+    <span>Ecommerce Optimization</span>
+    <span>Web Performance</span>
+    <span>AI Automation</span>
+    <span>HTML • CSS • JavaScript</span>
+  </div>
+</section>
 
-  <footer>
-    <p>© <span id="year"></span> Dinesh Bhairoju — Built with ❤️ + Three.js</p>
-    <p><a href="https://github.com/dineshbhairoju" target="_blank" rel="noopener">GitHub</a> ·
-       <a href="https://www.linkedin.com/in/dineshbhairoju" target="_blank" rel="noopener">LinkedIn</a></p>
-  </footer>
+<section id="contact" class="section">
+  <h2>Get In Touch</h2>
+  <p class="sub">Interested in digital growth or ecommerce optimization?</p>
+  <a href="mailto:dineshcharydinu@gmail.com" class="cta">Send Email</a>
+</section>
 
-  <!-- Three.js -->
-  <script src="https://cdn.jsdelivr.net/npm/three@0.154.0/build/three.min.js"></script>
-  <script>
-    // Year
-    document.getElementById('year').textContent = new Date().getFullYear();
+<footer>
+  <p>© <span id="year"></span> Dinesh Bhairoju</p>
+  <p>
+    <a href="https://github.com/dineshbhairoju" target="_blank">GitHub</a> ·
+    <a href="https://linkedin.com/in/dineshbhairoju" target="_blank">LinkedIn</a>
+  </p>
+</footer>
 
-    // Smooth scroll for nav/CTA
-    document.querySelectorAll('a[href^="#"]').forEach(a=>{
-      a.addEventListener('click',e=>{
-        const id=a.getAttribute('href');
-        if(id.length>1){ e.preventDefault(); document.querySelector(id)?.scrollIntoView({behavior:'smooth'}); }
-      });
-    });
-
-    // ===== THREE SETUP =====
-    const canvas = document.getElementById('bg');
-    const renderer = new THREE.WebGLRenderer({ canvas, antialias:true, alpha:true });
-    renderer.setPixelRatio(Math.min(devicePixelRatio,2));
-    renderer.setSize(innerWidth, innerHeight);
-
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(50, innerWidth/innerHeight, 0.1, 200);
-    camera.position.set(0,0,6);
-
-    // Lights
-    const dir = new THREE.DirectionalLight(0xffffff, 1.2); dir.position.set(5,3,5);
-    const amb = new THREE.AmbientLight(0x6666aa, .55);
-    scene.add(dir, amb);
-
-    // Stars
-    // ---------- better stars: layered + twinkle + parallax ----------
-const starLayers = [];
-
-function addStarLayer(count, size, color, spread, speed, opacity){
-  const positions = new Float32Array(count * 3);
-  for (let i = 0; i < positions.length; i++) positions[i] = (Math.random() - 0.5) * spread;
-
-  const geo = new THREE.BufferGeometry();
-  geo.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
-
-  const mat = new THREE.PointsMaterial({
-    size, color, transparent: true, opacity, depthWrite: false
-  });
-
-  const pts = new THREE.Points(geo, mat);
-  pts.userData = {
-    speed,               // slow rotation
-    baseOpacity: opacity,
-    phase: Math.random() * Math.PI * 2  // twinkle offset
-  };
-  scene.add(pts);
-  starLayers.push(pts);
-}
-
-// near / mid / far layers (tune colors & amounts to taste)
-addStarLayer(1200, 0.8, 0xffffff, 140, 0.00022, 0.55);
-addStarLayer( 800, 1.4, 0xC8B6FF, 180, 0.00012, 0.35);
-addStarLayer( 600, 2.0, 0x9B5DFF, 220, 0.00006, 0.22);
-
-
-    // Earth group
-    const g = new THREE.Group(); scene.add(g);
-
-    const loader = new THREE.TextureLoader();
-    const day   = loader.load('earth_day.jpg');
-    const night = loader.load('earth_night.jpg');
-
-    // Optional clouds (load only if present)
-    let cloudsTex = null;
-    loader.load('earth_clouds.png',
-      tex => cloudsTex = tex,
-      undefined,
-      () => {} // ignore error if file not found
-    );
-
-    // Earth with day map + emissive night lights
-    const earth = new THREE.Mesh(
-      new THREE.SphereGeometry(2, 64, 64),
-      new THREE.MeshPhongMaterial({
-        map: day,
-        emissiveMap: night,
-        emissive: new THREE.Color(0xffffff),
-        emissiveIntensity: 1.1
-      })
-    );
-    earth.rotation.z = THREE.MathUtils.degToRad(23.4);
-    g.add(earth);
-
-    // Atmosphere glow
-    const glow = new THREE.Mesh(
-      new THREE.SphereGeometry(2.15, 64, 64),
-      new THREE.MeshBasicMaterial({ color:0x6a00ff, transparent:true, opacity:.18, side:THREE.BackSide, blending:THREE.AdditiveBlending })
-    );
-    g.add(glow);
-
-    // Clouds layer (added after optional texture loads)
-    const addClouds = ()=> {
-      if(!cloudsTex) return;
-      const clouds = new THREE.Mesh(
-        new THREE.SphereGeometry(2.04, 64, 64),
-        new THREE.MeshLambertMaterial({ map: cloudsTex, transparent:true, opacity:.38, depthWrite:false })
-      );
-      clouds.name='clouds'; g.add(clouds);
-    };
-    setTimeout(addClouds, 500); // attempt after a short delay
-
-    // Mouse parallax
-    let mx=0,my=0, tx=0,ty=0;
-    addEventListener('pointermove',e=>{ mx=(e.clientX/innerWidth - .5)*2; my=(e.clientY/innerHeight - .5)*2; });
-
-    // Animate
-    function tick(){
-      earth.rotation.y += 0.0012;
-      glow.rotation.y  += 0.0012;
-      const clouds = g.getObjectByName('clouds'); if(clouds) clouds.rotation.y += 0.0016;
-
-      tx += (mx-tx)*0.05; ty += (my-ty)*0.05;
-      camera.position.x = tx*0.7; camera.position.y = -ty*0.5;
-      camera.lookAt(0,0,0);
-      const t = performance.now() * 0.001;
-
-starLayers.forEach((layer, i) => {
-  // gentle drift
-  layer.rotation.y += layer.userData.speed;
-
-  // twinkle (sinusoidal opacity around base)
-  layer.material.opacity =
-    layer.userData.baseOpacity * (0.7 + 0.3 * Math.sin(t * 1.5 + layer.userData.phase));
-
-  // parallax with mouse (assumes you already have mx,my in [-1..1])
-  layer.position.x = mx * -(i + 1) * 3;
-  layer.position.y = my *  (i + 1) * 3;
-});
-
-      
-      renderer.render(scene,camera);
-      requestAnimationFrame(tick);
-    }
-    tick();
-
-    // Resize
-    addEventListener('resize', ()=>{
-      camera.aspect = innerWidth/innerHeight; camera.updateProjectionMatrix();
-      renderer.setSize(innerWidth, innerHeight);
-    });
-  </script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.154.0/build/three.min.js"></script>
 <script>
-// Load textures (update these paths if needed)
-const loader = new THREE.TextureLoader();
-const day = loader.load('earth_day.jpg');
-const night = loader.load('earth_night.jpg');
+  document.getElementById('year').textContent = new Date().getFullYear();
 
-// Main Earth
-const g = new THREE.Group();
-scene.add(g);
+  const canvas = document.getElementById('bg');
+  const renderer = new THREE.WebGLRenderer({canvas, antialias:true, alpha:true});
+  renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+  renderer.setSize(innerWidth, innerHeight);
 
-const earth = new THREE.Mesh(
-  new THREE.SphereGeometry(2, 64, 64),
-  new THREE.MeshPhongMaterial({
-    map: day,
-    emissiveMap: night,
-    emissive: new THREE.Color(0xffffff),
-    emissiveIntensity: 1.1
-  })
-);
-earth.rotation.z = THREE.MathUtils.degToRad(23.4);
-g.add(earth);
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(50, innerWidth/innerHeight, 0.1, 200);
+  camera.position.z = 6;
 
-// Night overlay
-const nightOverlay = new THREE.Mesh(
-  new THREE.SphereGeometry(2.001, 64, 64),
-  new THREE.MeshBasicMaterial({
-    map: night,
-    transparent: true,
-    opacity: 0,
-    depthWrite: false
-  })
-);
-nightOverlay.renderOrder = 2;
-g.add(nightOverlay);
+  scene.add(new THREE.AmbientLight(0x6666aa, .6));
+  const light = new THREE.DirectionalLight(0xffffff, 1.1);
+  light.position.set(5,3,5);
+  scene.add(light);
 
-// Buttons
-let isNight = false;
-let autoTimer = null;
+  const loader = new THREE.TextureLoader();
+  const earth = new THREE.Mesh(
+    new THREE.SphereGeometry(2,64,64),
+    new THREE.MeshPhongMaterial({
+      map: loader.load('earth_day.jpg'),
+      emissiveMap: loader.load('earth_night.jpg'),
+      emissive: new THREE.Color(0xffffff),
+      emissiveIntensity:.6
+    })
+  );
+  earth.rotation.z = THREE.MathUtils.degToRad(23.4);
+  scene.add(earth);
 
-const btnToggle = document.getElementById('toggleMode');
-const btnAuto   = document.getElementById('autoMode');
-
-function setNight(on, instant=false){
-  isNight = on;
-  btnToggle.textContent = on ? 'Day ☀️' : 'Night 🌙';
-  const start = nightOverlay.material.opacity;
-  const target = on ? 1 : 0;
-  const dur = instant ? 0 : 600;
-  const t0 = performance.now();
-
-  function fade(t){
-    const k = dur ? Math.min(1, (t - t0)/dur) : 1;
-    nightOverlay.material.opacity = start + (target - start)*k;
-    if(k < 1) requestAnimationFrame(fade);
+  function animate(){
+    earth.rotation.y += 0.0012;
+    renderer.render(scene,camera);
+    requestAnimationFrame(animate);
   }
-  requestAnimationFrame(fade);
-}
+  animate();
 
-btnToggle?.addEventListener('click', ()=> setNight(!isNight));
-
-btnAuto?.addEventListener('click', ()=>{
-  if(autoTimer){
-    clearInterval(autoTimer);
-    autoTimer = null;
-    btnAuto.classList.remove('active');
-    btnAuto.textContent = 'Auto ⟳';
-  } else {
-    btnAuto.classList.add('active');
-    btnAuto.textContent = 'Auto ⏸';
-    autoTimer = setInterval(()=> setNight(!isNight), 8000);
-  }
-});
+  addEventListener('resize',()=>{
+    camera.aspect = innerWidth/innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(innerWidth,innerHeight);
+  });
 </script>
 
+</body>
+</html>
