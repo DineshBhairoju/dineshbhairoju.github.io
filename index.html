@@ -1,174 +1,197 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Dinesh Bhairoju — Digital Marketing & Ecommerce</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dinesh Bhairoju — Digital Marketing & Ecommerce</title>
 
-  <!-- SEO -->
-  <meta name="description" content="Digital Marketing & Ecommerce specialist focused on SEO, analytics, automation, and high-performance websites." />
-  <meta name="keywords" content="Dinesh Bhairoju, Digital Marketing, Ecommerce, SEO, GA4, Web Analytics" />
+<meta name="description" content="Digital Marketing & Ecommerce specialist focused on SEO, analytics, automation, and high-performance websites.">
 
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-  <style>
-    :root{
-      --accent:#8a63f9;
-      --accent2:#9b5dff;
-      --bg:#000;
-    }
-    *{box-sizing:border-box}
-    body{
-      margin:0;
-      font-family:Poppins,system-ui;
-      background:#000;
-      color:#fff;
-      overflow-x:hidden;
-      padding-top:72px;
-    }
+<style>
+:root{
+  --accent:#8a63f9;
+  --accent2:#9b5dff;
+}
 
-    /* Header */
-    header{
-      position:fixed;
-      top:0; left:0; right:0;
-      height:72px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      padding:0 28px;
-      background:rgba(0,0,0,.5);
-      backdrop-filter:blur(12px);
-      border-bottom:1px solid rgba(255,255,255,.06);
-      z-index:20;
-    }
-    .brand{font-size:22px;font-weight:800}
-    .brand span{color:var(--accent)}
-    nav a{
-      margin-left:22px;
-      text-decoration:none;
-      color:#fff;
-      font-weight:500;
-      opacity:.9;
-    }
-    nav a:hover{color:var(--accent)}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:Poppins,system-ui;
+  background:#000;
+  color:#fff;
+  overflow-x:hidden;
+  padding-top:72px;
+}
 
-    /* Canvas */
-    canvas#bg{
-      position:fixed;
-      inset:0;
-      z-index:-1;
-      background:radial-gradient(ellipse at 50% -20%, #0b0226 0%, #000 60%);
-    }
+/* Header */
+header{
+  position:fixed;
+  top:0; left:0; right:0;
+  height:72px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 28px;
+  background:rgba(0,0,0,.5);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid rgba(255,255,255,.08);
+  z-index:20;
+}
+.brand{font-size:22px;font-weight:800}
+.brand span{color:var(--accent)}
+nav a{
+  margin-left:22px;
+  text-decoration:none;
+  color:#fff;
+  font-weight:500;
+}
+nav a:hover{color:var(--accent)}
 
-    /* Hero */
-    .hero{
-      min-height:70vh;
-      display:grid;
-      place-items:center;
-      text-align:center;
-      padding:40px 18px;
-    }
-    .avatar{
-      width:130px;
-      height:130px;
-      border-radius:50%;
-      border:3px solid rgba(255,255,255,.25);
-      box-shadow:0 0 24px rgba(155,93,255,.4);
-      margin-bottom:20px;
-    }
-    h1{
-      font-size:clamp(32px,6vw,56px);
-      font-weight:800;
-      margin:0 0 12px;
-    }
-    h1 span{color:var(--accent)}
-    .sub{
-      max-width:760px;
-      margin:0 auto 24px;
-      color:#cfcfe9;
-      line-height:1.6;
-    }
-    .cta{
-      padding:12px 26px;
-      border-radius:999px;
-      background:linear-gradient(90deg,var(--accent),var(--accent2));
-      color:#fff;
-      text-decoration:none;
-      font-weight:700;
-      box-shadow:0 10px 26px rgba(155,93,255,.35);
-    }
+/* Canvas */
+canvas#bg{
+  position:fixed;
+  inset:0;
+  z-index:-1;
+  background:radial-gradient(ellipse at 50% -20%, #0b0226 0%, #000 60%);
+}
 
-    /* Sections */
-    .section{
-      padding:96px 20px;
-      text-align:center;
-      position:relative;
-      z-index:10;
-    }
-    .section.dark{background:rgba(255,255,255,.04)}
-    h2{
-      font-size:clamp(28px,4vw,40px);
-      color:#d7c6ff;
-      margin-bottom:26px;
-    }
+/* Hero */
+.hero{
+  min-height:70vh;
+  display:grid;
+  place-items:center;
+  text-align:center;
+  padding:40px 18px;
+}
+.avatar{
+  width:130px;
+  height:130px;
+  border-radius:50%;
+  border:3px solid rgba(255,255,255,.25);
+  box-shadow:0 0 26px rgba(155,93,255,.45);
+  margin-bottom:20px;
+}
+h1{
+  font-size:clamp(32px,6vw,56px);
+  font-weight:800;
+  margin:0 0 12px;
+}
+h1 span{color:var(--accent)}
+.sub{
+  max-width:760px;
+  margin:0 auto 24px;
+  color:#cfcfe9;
+  line-height:1.6;
+}
+.cta{
+  padding:12px 26px;
+  border-radius:999px;
+  background:linear-gradient(90deg,var(--accent),var(--accent2));
+  color:#fff;
+  text-decoration:none;
+  font-weight:700;
+  box-shadow:0 10px 26px rgba(155,93,255,.35);
+}
 
-    /* About */
-    .about{
-      max-width:900px;
-      margin:auto;
-      line-height:1.7;
-      color:#ddd;
-    }
+/* Sections */
+.section{
+  padding:96px 20px;
+  text-align:center;
+  position:relative;
+  z-index:10;
+}
+.section.dark{background:rgba(255,255,255,.04)}
+h2{
+  font-size:clamp(28px,4vw,40px);
+  color:#d7c6ff;
+  margin-bottom:26px;
+}
 
-    /* Projects */
-    .projects{
-      display:flex;
-      flex-wrap:wrap;
-      gap:26px;
-      justify-content:center;
-      max-width:1100px;
-      margin:auto;
-    }
-    .card{
-      width:min(320px,90vw);
-      background:rgba(255,255,255,.06);
-      border:1px solid rgba(255,255,255,.1);
-      border-radius:18px;
-      padding:22px;
-      text-align:left;
-      box-shadow:0 10px 30px rgba(0,0,0,.35);
-    }
-    .card h3{margin:0 0 8px}
-    .card p{font-size:15px;color:#ddd}
+/* About */
+.about{
+  max-width:900px;
+  margin:auto;
+  line-height:1.7;
+  color:#ddd;
+}
 
-    /* Skills */
-    .skills{
-      display:flex;
-      flex-wrap:wrap;
-      gap:14px;
-      justify-content:center;
-      max-width:900px;
-      margin:auto;
-    }
-    .skills span{
-      padding:10px 16px;
-      border-radius:999px;
-      background:rgba(255,255,255,.08);
-      border:1px solid rgba(255,255,255,.12);
-    }
+/* Projects */
+.projects{
+  display:flex;
+  flex-wrap:wrap;
+  gap:26px;
+  justify-content:center;
+  max-width:1100px;
+  margin:auto;
+}
+.card{
+  width:min(320px,90vw);
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:18px;
+  padding:22px;
+  text-align:left;
+  box-shadow:0 10px 30px rgba(0,0,0,.35);
+}
+.card h3{margin:0 0 8px}
+.card p{font-size:15px;color:#ddd}
 
-    footer{
-      padding:42px 12px;
-      text-align:center;
-      color:#aaa;
-      background:rgba(0,0,0,.6);
-      border-top:1px solid rgba(255,255,255,.06);
-    }
-    footer a{color:#cdb7ff;text-decoration:none}
-  </style>
+/* Skills */
+.skills{
+  display:flex;
+  flex-wrap:wrap;
+  gap:14px;
+  justify-content:center;
+  max-width:900px;
+  margin:auto;
+}
+.skills span{
+  padding:10px 16px;
+  border-radius:999px;
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.12);
+}
+
+/* Footer */
+footer{
+  padding:42px 12px;
+  text-align:center;
+  color:#aaa;
+  background:rgba(0,0,0,.6);
+  border-top:1px solid rgba(255,255,255,.06);
+}
+footer a{color:#cdb7ff;text-decoration:none}
+
+/* ===== Scroll Animations ===== */
+.reveal{
+  opacity:0;
+  transform:translateY(40px);
+  transition:opacity .8s ease, transform .8s ease;
+}
+.reveal.active{
+  opacity:1;
+  transform:translateY(0);
+}
+
+.stagger > *{
+  opacity:0;
+  transform:translateY(30px);
+  transition:opacity .7s ease, transform .7s ease;
+}
+.stagger.active > *{
+  opacity:1;
+  transform:translateY(0);
+}
+.stagger.active > *:nth-child(1){transition-delay:.1s}
+.stagger.active > *:nth-child(2){transition-delay:.2s}
+.stagger.active > *:nth-child(3){transition-delay:.3s}
+.stagger.active > *:nth-child(4){transition-delay:.4s}
+.stagger.active > *:nth-child(5){transition-delay:.5s}
+</style>
 </head>
 
 <body>
@@ -197,39 +220,35 @@
   </div>
 </section>
 
-<section id="about" class="section dark">
+<section id="about" class="section dark reveal">
   <h2>About Me</h2>
   <p class="about">
-    I work at the intersection of digital marketing and ecommerce, helping brands
-    improve visibility, performance, and conversions. My focus is on SEO, analytics,
-    automation, and clean web experiences backed by data-driven decisions.
+    I specialize in digital marketing and ecommerce optimization, focusing on SEO,
+    analytics, automation, and performance-driven web experiences backed by data.
   </p>
 </section>
 
-<section id="projects" class="section">
+<section id="projects" class="section reveal">
   <h2>Ecommerce & Marketing Projects</h2>
-  <div class="projects">
+  <div class="projects stagger">
     <div class="card">
       <h3>Ecommerce SEO Optimization</h3>
-      <p>Improved site structure, on-page SEO, and tracking using GA4 and Search Console
-         to enhance organic visibility and performance.</p>
+      <p>Improved site structure, on-page SEO, and organic performance using GA4 and Search Console.</p>
     </div>
     <div class="card">
       <h3>Analytics & Conversion Tracking</h3>
-      <p>Implemented event tracking, funnels, and performance dashboards to understand
-         user behavior and optimize conversions.</p>
+      <p>Implemented event tracking, funnels, and dashboards to understand and improve user journeys.</p>
     </div>
     <div class="card">
-      <h3>High-Performance Website</h3>
-      <p>Built fast, mobile-first websites with optimized assets, clean UI, and strong
-         technical SEO foundations.</p>
+      <h3>High-Performance Websites</h3>
+      <p>Built fast, mobile-first websites with clean UI and strong technical SEO foundations.</p>
     </div>
   </div>
 </section>
 
-<section id="skills" class="section dark">
+<section id="skills" class="section dark reveal">
   <h2>Skills & Tools</h2>
-  <div class="skills">
+  <div class="skills stagger">
     <span>SEO (On-page & Technical)</span>
     <span>Google Analytics 4</span>
     <span>Google Search Console</span>
@@ -240,7 +259,7 @@
   </div>
 </section>
 
-<section id="contact" class="section">
+<section id="contact" class="section reveal">
   <h2>Get In Touch</h2>
   <p class="sub">Interested in digital growth or ecommerce optimization?</p>
   <a href="mailto:dineshcharydinu@gmail.com" class="cta">Send Email</a>
@@ -256,47 +275,61 @@
 
 <script src="https://cdn.jsdelivr.net/npm/three@0.154.0/build/three.min.js"></script>
 <script>
-  document.getElementById('year').textContent = new Date().getFullYear();
+document.getElementById('year').textContent = new Date().getFullYear();
 
-  const canvas = document.getElementById('bg');
-  const renderer = new THREE.WebGLRenderer({canvas, antialias:true, alpha:true});
-  renderer.setPixelRatio(Math.min(devicePixelRatio,2));
-  renderer.setSize(innerWidth, innerHeight);
+/* THREE.JS */
+const canvas = document.getElementById('bg');
+const renderer = new THREE.WebGLRenderer({canvas, antialias:true, alpha:true});
+renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+renderer.setSize(innerWidth, innerHeight);
 
-  const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(50, innerWidth/innerHeight, 0.1, 200);
-  camera.position.z = 6;
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(50, innerWidth/innerHeight, 0.1, 200);
+camera.position.z = 6;
 
-  scene.add(new THREE.AmbientLight(0x6666aa, .6));
-  const light = new THREE.DirectionalLight(0xffffff, 1.1);
-  light.position.set(5,3,5);
-  scene.add(light);
+scene.add(new THREE.AmbientLight(0x6666aa,.6));
+const light = new THREE.DirectionalLight(0xffffff,1.1);
+light.position.set(5,3,5);
+scene.add(light);
 
-  const loader = new THREE.TextureLoader();
-  const earth = new THREE.Mesh(
-    new THREE.SphereGeometry(2,64,64),
-    new THREE.MeshPhongMaterial({
-      map: loader.load('earth_day.jpg'),
-      emissiveMap: loader.load('earth_night.jpg'),
-      emissive: new THREE.Color(0xffffff),
-      emissiveIntensity:.6
-    })
-  );
-  earth.rotation.z = THREE.MathUtils.degToRad(23.4);
-  scene.add(earth);
+const loader = new THREE.TextureLoader();
+const earth = new THREE.Mesh(
+  new THREE.SphereGeometry(2,64,64),
+  new THREE.MeshPhongMaterial({
+    map: loader.load('earth_day.jpg'),
+    emissiveMap: loader.load('earth_night.jpg'),
+    emissive: new THREE.Color(0xffffff),
+    emissiveIntensity:.6
+  })
+);
+earth.rotation.z = THREE.MathUtils.degToRad(23.4);
+scene.add(earth);
 
-  function animate(){
-    earth.rotation.y += 0.0012;
-    renderer.render(scene,camera);
-    requestAnimationFrame(animate);
-  }
-  animate();
+function animate(){
+  earth.rotation.y += 0.0012;
+  renderer.render(scene,camera);
+  requestAnimationFrame(animate);
+}
+animate();
 
-  addEventListener('resize',()=>{
-    camera.aspect = innerWidth/innerHeight;
-    camera.updateProjectionMatrix();
-    renderer.setSize(innerWidth,innerHeight);
+addEventListener('resize',()=>{
+  camera.aspect = innerWidth/innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(innerWidth,innerHeight);
+});
+
+/* Scroll animations */
+const observer = new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      entry.target.classList.add("active");
+    }
   });
+},{threshold:0.15});
+
+document.querySelectorAll(".reveal,.stagger").forEach(el=>{
+  observer.observe(el);
+});
 </script>
 
 </body>
