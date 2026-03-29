@@ -16,14 +16,9 @@
 body{
   margin:0;
   font-family:Poppins;
+  background:#000;
   color:#fff;
   overflow:hidden;
-
-  /* 🔥 PREMIUM BACKGROUND */
-  background:
-  radial-gradient(circle at 20% 20%, rgba(138,99,249,0.4), transparent 40%),
-  radial-gradient(circle at 80% 60%, rgba(155,93,255,0.3), transparent 40%),
-  linear-gradient(120deg,#000000,#0b0015,#000000);
 }
 
 /* HEADER */
@@ -47,39 +42,21 @@ header span{color:var(--accent)}
   justify-content:center;
   align-items:center;
   text-align:center;
-  position:relative;
-}
-
-/* 🔥 MOVING LIGHT EFFECT */
-.hero::before{
-  content:"";
-  position:absolute;
-  width:500px;
-  height:500px;
-  background:radial-gradient(circle, rgba(155,93,255,.4), transparent 60%);
-  filter:blur(80px);
-  animation:moveLight 8s infinite alternate;
-}
-
-@keyframes moveLight{
-  0%{transform:translate(-100px,-50px);}
-  100%{transform:translate(100px,50px);}
 }
 
 /* PROFILE */
 .profile{
-  width:140px;
-  height:140px;
+  width:130px;
+  height:130px;
   border-radius:50%;
   border:3px solid var(--accent);
-  box-shadow:0 0 40px rgba(155,93,255,.9);
+  box-shadow:0 0 30px rgba(155,93,255,.9);
   margin-bottom:20px;
-  object-fit:cover;
 }
 
 /* TEXT */
 .hero h1{
-  font-size:36px;
+  font-size:34px;
   margin:10px 0;
 }
 .hero p{
@@ -102,10 +79,9 @@ header span{color:var(--accent)}
 }
 .social a:hover{
   background:linear-gradient(90deg,var(--accent),var(--accent2));
-  transform:scale(1.1);
 }
 
-/* 🔥 AI BUTTON */
+/* AI BUTTON */
 #aiBtn{
   position:absolute;
   bottom:80px;
@@ -127,6 +103,26 @@ header span{color:var(--accent)}
   100%{box-shadow:0 0 0 0 rgba(155,93,255,0)}
 }
 
+/* BACKGROUND BLOBS */
+.blob{
+  position:absolute;
+  width:400px;
+  height:400px;
+  background:linear-gradient(120deg,#8a63f9,#9b5dff);
+  border-radius:50%;
+  filter:blur(100px);
+  opacity:.5;
+  animation:move 10s infinite alternate;
+}
+
+.blob1{top:10%;left:10%;}
+.blob2{bottom:10%;right:10%;animation-delay:3s;}
+
+@keyframes move{
+  0%{transform:translate(0,0) scale(1);}
+  100%{transform:translate(50px,-50px) scale(1.2);}
+}
+
 /* CHAT */
 #chatbox{
   position:fixed;
@@ -136,10 +132,9 @@ header span{color:var(--accent)}
   height:420px;
   display:none;
   flex-direction:column;
-  background:rgba(0,0,0,.85);
+  background:rgba(0,0,0,.8);
   backdrop-filter:blur(20px);
   border-radius:20px;
-  border:1px solid rgba(255,255,255,.1);
 }
 
 .chat-header{
@@ -168,7 +163,6 @@ header span{color:var(--accent)}
   margin:5px 0;
 }
 
-/* INPUT */
 .chat-input-box{
   display:flex;
 }
@@ -192,9 +186,12 @@ header span{color:var(--accent)}
 
 <header>Dinesh<span>•</span>Bhairoju</header>
 
+<!-- BACKGROUND -->
+<div class="blob blob1"></div>
+<div class="blob blob2"></div>
+
 <section class="hero">
 
-  <!-- YOUR IMAGE -->
   <img src="dinesh.jpg" class="profile">
 
   <h1>Hi, I'm Dinesh Bhairoju</h1>
@@ -212,7 +209,7 @@ header span{color:var(--accent)}
 <!-- CHAT -->
 <div id="chatbox">
   <div class="chat-header">
-    Dinesh AI
+    Dinesh Bhairoju AI Assistant 
     <span onclick="chatbox.style.display='none'">✖</span>
   </div>
 
@@ -276,4 +273,4 @@ function speak(text){
 </script>
 
 </body>
-</html>
+    </html>
