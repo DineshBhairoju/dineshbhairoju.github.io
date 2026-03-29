@@ -26,8 +26,6 @@ header{
   top:0;
   width:100%;
   padding:20px 30px;
-  display:flex;
-  justify-content:space-between;
   background:rgba(0,0,0,.5);
   backdrop-filter:blur(10px);
 }
@@ -38,7 +36,6 @@ header{
 .hero{
   height:100vh;
   display:flex;
-  flex-direction:column;
   justify-content:center;
   align-items:center;
   text-align:center;
@@ -49,58 +46,61 @@ h1 span{
   -webkit-text-fill-color:transparent;
 }
 
-/* BUTTONS */
-.btn{
-  position:fixed;
-  width:65px;
-  height:65px;
-  border-radius:50%;
-  border:none;
-  font-size:22px;
-  background:linear-gradient(90deg,var(--accent),var(--accent2));
-  box-shadow:0 0 25px rgba(155,93,255,.8);
-  cursor:pointer;
-}
-#voiceBtn{left:20px;bottom:20px;}
-#chatBtn{right:20px;bottom:20px;}
+/* SINGLE AI BUTTON */
 #aiBtn{
+  position:fixed;
+  bottom:25px;
   left:50%;
   transform:translateX(-50%);
-  bottom:20px;
+  width:70px;
+  height:70px;
+  border-radius:50%;
+  border:none;
+  font-size:28px;
+  background:linear-gradient(90deg,var(--accent),var(--accent2));
+  box-shadow:0 0 30px rgba(155,93,255,.8);
+  cursor:pointer;
+  transition:.3s;
+}
+#aiBtn:hover{
+  transform:translateX(-50%) scale(1.1);
 }
 
-/* LISTENING EFFECT */
+/* LISTENING ANIMATION */
 .listening{
   animation:pulse 1s infinite;
 }
 @keyframes pulse{
   0%{box-shadow:0 0 10px var(--accent)}
-  50%{box-shadow:0 0 40px var(--accent2)}
+  50%{box-shadow:0 0 50px var(--accent2)}
   100%{box-shadow:0 0 10px var(--accent)}
 }
 
-/* CHAT */
+/* CHAT BOX */
 #chatbox{
   position:fixed;
-  bottom:100px;
+  bottom:110px;
   right:20px;
   width:320px;
   height:420px;
   display:none;
   flex-direction:column;
-  background:rgba(0,0,0,.7);
+  background:rgba(0,0,0,.75);
   backdrop-filter:blur(20px);
   border-radius:20px;
-  border:1px solid rgba(255,255,255,.2);
+  border:1px solid rgba(255,255,255,.1);
 }
 
+/* HEADER */
 .chat-header{
   padding:12px;
   background:linear-gradient(90deg,var(--accent),var(--accent2));
   display:flex;
   justify-content:space-between;
+  font-weight:600;
 }
 
+/* BODY */
 #chat-body{
   flex:1;
   overflow-y:auto;
@@ -114,8 +114,14 @@ h1 span{
   max-width:80%;
 }
 
-.user{background:#111;margin-left:auto;}
-.bot{background:linear-gradient(90deg,var(--accent),var(--accent2));}
+.user{
+  background:#111;
+  margin-left:auto;
+}
+
+.bot{
+  background:linear-gradient(90deg,var(--accent),var(--accent2));
+}
 
 /* INPUT */
 .chat-input-box{
@@ -130,9 +136,9 @@ h1 span{
   color:#fff;
 }
 #sendBtn{
-  width:50px;
-  background:var(--accent);
+  width:55px;
   border:none;
+  background:linear-gradient(90deg,var(--accent),var(--accent2));
   color:#fff;
   font-size:18px;
 }
@@ -159,15 +165,13 @@ canvas{
   <h1>Hi, I'm <span>Dinesh Bhairoju</span></h1>
 </section>
 
-<!-- BUTTONS -->
-<button id="voiceBtn" class="btn">🎤</button>
-<button id="aiBtn" class="btn">🤖</button>
-<button id="chatBtn" class="btn">💬</button>
+<!-- ONLY ONE BUTTON -->
+<button id="aiBtn">AI</button>
 
 <!-- CHAT -->
 <div id="chatbox">
   <div class="chat-header">
-    🤖 Dinesh AI
+    Dinesh AI
     <span id="closeChat">✖</span>
   </div>
 
@@ -182,7 +186,7 @@ canvas{
 <script src="https://cdn.jsdelivr.net/npm/three@0.154.0/build/three.min.js"></script>
 
 <script>
-/* ===== 3D ===== */
+/* 3D */
 const renderer = new THREE.WebGLRenderer({canvas:bg, alpha:true});
 renderer.setSize(innerWidth, innerHeight);
 
@@ -207,19 +211,21 @@ function animate(){
 }
 animate();
 
-/* ===== CHAT ===== */
-const chatBtn = document.getElementById("chatBtn");
+/* CHAT */
 const aiBtn = document.getElementById("aiBtn");
-const voiceBtn = document.getElementById("voiceBtn");
 const chatbox = document.getElementById("chatbox");
 const closeChat = document.getElementById("closeChat");
 const input = document.getElementById("chat-input");
 const body = document.getElementById("chat-body");
 
-chatBtn.onclick = ()=> chatbox.style.display="flex";
+aiBtn.onclick = ()=>{
+  chatbox.style.display="flex";
+  startVoice(); // voice + chat together
+};
+
 closeChat.onclick = ()=> chatbox.style.display="none";
 
-/* ===== ADD MESSAGE ===== */
+/* ADD MESSAGE */
 function addMessage(text, cls){
   const div = document.createElement("div");
   div.className = "msg " + cls;
@@ -228,17 +234,18 @@ function addMessage(text, cls){
   body.scrollTop = body.scrollHeight;
 }
 
-/* ===== SIMPLE AI ===== */
+/* AI LOGIC */
 function reply(msg){
   msg = msg.toLowerCase();
 
-  if(msg.includes("hi")) return "Hey 👋 How can I help you?";
-  if(msg.includes("who")) return "Dinesh Bhairoju is an AI + Digital Marketing expert 🚀";
+  if(msg.includes("hi")) return "Hello. How can I help you?";
+  if(msg.includes("skills")) return "Dinesh works in AI, Digital Marketing, and Ecommerce.";
+  if(msg.includes("who")) return "Dinesh Bhairoju is an AI-focused digital specialist.";
 
-  return "That's interesting 👀 tell me more!";
+  return "Please tell me more.";
 }
 
-/* ===== SEND ===== */
+/* SEND */
 function sendMessage(){
   const msg = input.value;
   if(!msg) return;
@@ -250,58 +257,49 @@ function sendMessage(){
     const res = reply(msg);
     addMessage(res,"bot");
     speak(res);
-  },500);
+  },400);
 }
 
 document.getElementById("sendBtn").onclick = sendMessage;
-
 input.addEventListener("keydown",(e)=>{
   if(e.key==="Enter") sendMessage();
 });
 
-/* ===== VOICE ===== */
+/* VOICE */
 function startVoice(){
   const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
 
-  voiceBtn.classList.add("listening");
+  aiBtn.classList.add("listening");
 
   recognition.onresult = (e)=>{
     const text = e.results[0][0].transcript;
+
     addMessage(text,"user");
 
     const res = reply(text);
     addMessage(res,"bot");
     speak(res);
 
-    voiceBtn.classList.remove("listening");
+    aiBtn.classList.remove("listening");
   };
 
   recognition.onerror = ()=>{
-    voiceBtn.classList.remove("listening");
-    alert("Mic not allowed or not supported");
+    aiBtn.classList.remove("listening");
   };
 
   recognition.start();
 }
 
-/* BUTTONS */
-voiceBtn.onclick = startVoice;
-
-aiBtn.onclick = ()=>{
-  chatbox.style.display="flex";
-  startVoice(); // opens + listens
-};
-
-/* ===== SPEAK ===== */
+/* SPEAK */
 function speak(text){
   const speech = new SpeechSynthesisUtterance(text);
   speech.rate = 1;
   speechSynthesis.speak(speech);
 }
 
-/* ===== INTRO ===== */
+/* INTRO */
 window.onload = ()=>{
-  addMessage("Hey 👋 I'm Dinesh AI. Ask me anything 🚀","bot");
+  addMessage("Hello. I am Dinesh AI. Ask me anything.","bot");
 };
 </script>
 
