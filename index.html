@@ -61,7 +61,7 @@ h1 span{
   box-shadow:0 0 25px rgba(155,93,255,.5);
 }
 
-/* FLOAT BUTTONS */
+/* BUTTONS */
 .btn{
   position:fixed;
   width:65px;
@@ -72,11 +72,16 @@ h1 span{
   background:linear-gradient(90deg,var(--accent),var(--accent2));
   box-shadow:0 0 25px rgba(155,93,255,.8);
   cursor:pointer;
+  transition:.3s;
+}
+.btn:hover{
+  transform:scale(1.1);
+  box-shadow:0 0 40px rgba(155,93,255,1);
 }
 #voiceBtn{left:20px;bottom:20px;}
 #chatBtn{right:20px;bottom:20px;}
 
-/* CHAT POPUP */
+/* CHATBOX */
 #chatbox{
   position:fixed;
   bottom:100px;
@@ -85,19 +90,19 @@ h1 span{
   height:420px;
   display:none;
   flex-direction:column;
-  background:rgba(0,0,0,.6);
+  background:rgba(0,0,0,.7);
   backdrop-filter:blur(20px);
   border-radius:20px;
   border:1px solid rgba(255,255,255,.2);
   overflow:hidden;
   z-index:20;
+  animation:fadeIn .3s ease;
 }
 
 /* HEADER */
 .chat-header{
   padding:12px;
   background:linear-gradient(90deg,var(--accent),var(--accent2));
-  font-weight:600;
   display:flex;
   justify-content:space-between;
 }
@@ -106,26 +111,31 @@ h1 span{
 #chat-body{
   flex:1;
   overflow-y:auto;
-  padding:12px;
+  padding:10px;
   font-size:14px;
-  display:flex;
-  flex-direction:column;
-  gap:8px;
 }
 
-/* BUBBLES */
+/* MESSAGES */
 .msg{
   padding:10px 14px;
-  border-radius:14px;
-  max-width:75%;
+  border-radius:16px;
+  margin:6px 0;
+  max-width:80%;
+  transition:.3s;
 }
+
 .user{
-  align-self:flex-end;
-  background:#222;
+  background:#111;
+  margin-left:auto;
 }
+
 .bot{
-  align-self:flex-start;
   background:linear-gradient(90deg,var(--accent),var(--accent2));
+}
+
+.msg:hover{
+  transform:scale(1.05);
+  box-shadow:0 0 20px rgba(155,93,255,.6);
 }
 
 /* INPUT */
@@ -135,6 +145,12 @@ h1 span{
   background:#000;
   color:#fff;
   outline:none;
+}
+
+/* ANIMATION */
+@keyframes fadeIn{
+  from{opacity:0; transform:translateY(20px);}
+  to{opacity:1; transform:translateY(0);}
 }
 
 /* CANVAS */
@@ -167,7 +183,7 @@ canvas{
 <div id="chatbox">
   <div class="chat-header">
     🤖 Assistant
-    <span id="closeChat">✖</span>
+    <span id="closeChat" style="cursor:pointer">✖</span>
   </div>
   <div id="chat-body"></div>
   <input id="chat-input" placeholder="Ask me anything...">
@@ -196,27 +212,23 @@ scene.add(light);
 
 function animate(){
   requestAnimationFrame(animate);
-  sphere.rotation.y += 0.004;
+  sphere.rotation.y += 0.005;
   sphere.position.y = Math.sin(Date.now()*0.001)*0.3;
   renderer.render(scene, camera);
 }
 animate();
 
-/* ===== CHAT TOGGLE ===== */
-chatBtn.onclick = ()=> chatbox.style.display="flex";
-closeChat.onclick = ()=> chatbox.style.display="none";
-
-/* ===== FAKE AI ===== */
+/* ===== CHAT ===== */
+const chatBtn = document.getElementById("chatBtn");
+const chatbox = document.getElementById("chatbox");
+const closeChat = document.getElementById("closeChat");
 const input = document.getElementById("chat-input");
 const body = document.getElementById("chat-body");
 
-const replies = {
-  "hi":"Hey 👋 I'm Dinesh's AI assistant!",
-  "who are you":"I represent Dinesh Bhairoju 🚀",
-  "skills":"SEO, Ecommerce, Analytics, AI Automation 💡",
-  "contact":"Reach via email or LinkedIn 📩",
-  "default":"That's interesting 👀 tell me more!"
-};
+chatBtn.onclick = ()=> chatbox.style.display="flex";
+closeChat.onclick = ()=> chatbox.style.display="none";
+
+let memory = [];
 
 function addMsg(text,type){
   const div = document.createElement("div");
@@ -226,12 +238,28 @@ function addMsg(text,type){
   body.scrollTop = body.scrollHeight;
 }
 
-function getReply(text){
+function typeEffect(element,text){
+  let i=0;
+  const interval = setInterval(()=>{
+    element.innerText += text.charAt(i);
+    i++;
+    if(i>=text.length) clearInterval(interval);
+  },20);
+}
+
+function smartReply(text){
   text = text.toLowerCase();
-  for(let key in replies){
-    if(text.includes(key)) return replies[key];
+
+  if(text.includes("hi")) return "Hey 👋 I'm Dinesh's AI assistant!";
+  if(text.includes("who are you")) return "I'm a smart AI assistant built into this portfolio 🚀";
+  if(text.includes("dinesh")) return "Dinesh Bhairoju is an AI + Ecommerce + Digital Marketing specialist 💡";
+  if(text.includes("skills")) return "SEO, Ads, Ecommerce scaling, and AI automation 🔥";
+
+  if(memory.length > 2){
+    return "I see you're interested 👀 tell me more!";
   }
-  return replies.default;
+
+  return "That's interesting 👀 tell me more!";
 }
 
 input.addEventListener("keydown",(e)=>{
@@ -240,13 +268,28 @@ input.addEventListener("keydown",(e)=>{
     if(!text) return;
 
     addMsg(text,"user");
+    memory.push(text);
     input.value="";
 
+    const typing = document.createElement("div");
+    typing.className="msg bot";
+    typing.innerText="Typing...";
+    body.appendChild(typing);
+
     setTimeout(()=>{
-      const res = getReply(text);
-      addMsg(res,"bot");
-      speak(res);
-    },500);
+      typing.remove();
+
+      const reply = smartReply(text);
+
+      const botDiv = document.createElement("div");
+      botDiv.className="msg bot";
+      body.appendChild(botDiv);
+
+      typeEffect(botDiv, reply);
+      speak(reply);
+
+      memory.push(reply);
+    },800);
   }
 });
 
@@ -258,18 +301,23 @@ function speak(text){
   speechSynthesis.speak(speech);
 }
 
-voiceBtn.onclick = ()=>{
+document.getElementById("voiceBtn").onclick = ()=>{
   const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
-  recognition.onresult = (e)=>{
-    const text = e.results[0][0].transcript;
+
+  recognition.onresult = (event)=>{
+    const text = event.results[0][0].transcript;
     addMsg(text,"user");
 
-    const res = getReply(text);
-    setTimeout(()=>{
-      addMsg(res,"bot");
-      speak(res);
-    },500);
+    const reply = smartReply(text);
+
+    const botDiv = document.createElement("div");
+    botDiv.className="msg bot";
+    body.appendChild(botDiv);
+
+    typeEffect(botDiv, reply);
+    speak(reply);
   };
+
   recognition.start();
 };
 </script>
