@@ -26,14 +26,18 @@ header{
   position:fixed;
   top:0;
   width:100%;
-  padding:20px;
+  padding:20px 30px;
   display:flex;
   justify-content:space-between;
-  background:rgba(0,0,0,.6);
-  backdrop-filter:blur(12px);
+  align-items:center;
+  background:rgba(0,0,0,.5);
+  backdrop-filter:blur(10px);
   z-index:10;
 }
-.logo{font-weight:800;font-size:20px;}
+.logo{
+  font-weight:800;
+  font-size:22px;
+}
 .logo span{color:var(--accent)}
 
 /* HERO */
@@ -44,13 +48,51 @@ header{
   justify-content:center;
   align-items:center;
   text-align:center;
-  padding-top:80px;
+  padding:0 20px;
 }
+
 h1{
-  font-size:48px;
+  font-size:clamp(32px,6vw,64px);
+  margin-bottom:10px;
 }
-h1 span{color:var(--accent)}
-p{color:#ccc}
+h1 span{
+  background:linear-gradient(90deg,#fff,var(--accent));
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+.sub{
+  color:#ccc;
+  margin-bottom:25px;
+  max-width:500px;
+}
+
+/* BUTTON */
+.cta{
+  padding:14px 30px;
+  border-radius:40px;
+  background:linear-gradient(90deg,var(--accent),var(--accent2));
+  box-shadow:0 0 25px rgba(155,93,255,.5);
+  cursor:pointer;
+  transition:.3s;
+}
+.cta:hover{
+  transform:scale(1.05);
+}
+
+/* FLOAT BUTTONS */
+.btn{
+  position:fixed;
+  width:65px;
+  height:65px;
+  border-radius:50%;
+  border:none;
+  font-size:22px;
+  background:linear-gradient(90deg,var(--accent),var(--accent2));
+  box-shadow:0 0 25px rgba(155,93,255,.8);
+}
+#voiceBtn{left:20px;bottom:20px;}
+#chatBtn{right:20px;bottom:20px;}
 
 /* CANVAS */
 canvas{
@@ -58,66 +100,6 @@ canvas{
   top:0;
   left:0;
   z-index:-1;
-}
-
-/* CHAT TOGGLE BUTTON */
-#chatToggle{
-  position:fixed;
-  bottom:20px;
-  right:20px;
-  width:60px;
-  height:60px;
-  border-radius:50%;
-  border:none;
-  font-size:22px;
-  background:linear-gradient(90deg,var(--accent),var(--accent2));
-  box-shadow:0 0 20px rgba(155,93,255,.7);
-  z-index:20;
-}
-
-/* CHATBOX */
-#chatbot{
-  position:fixed;
-  bottom:90px;
-  right:20px;
-  width:300px;
-  height:380px;
-  display:none;
-  flex-direction:column;
-  background:rgba(0,0,0,.7);
-  backdrop-filter:blur(20px);
-  border-radius:20px;
-  border:1px solid rgba(255,255,255,.2);
-  overflow:hidden;
-  z-index:20;
-}
-#chat-header{
-  padding:10px;
-  background:linear-gradient(90deg,var(--accent),var(--accent2));
-}
-#chat-body{
-  flex:1;
-  overflow:auto;
-  padding:10px;
-}
-#chat-input{
-  padding:10px;
-  border:none;
-  background:#111;
-  color:#fff;
-}
-
-/* VOICE */
-#voiceBtn{
-  position:fixed;
-  bottom:20px;
-  left:20px;
-  width:65px;
-  height:65px;
-  border-radius:50%;
-  border:none;
-  background:linear-gradient(90deg,var(--accent),var(--accent2));
-  font-size:22px;
 }
 </style>
 </head>
@@ -132,93 +114,55 @@ canvas{
 
 <section class="hero">
   <h1>Hi, I'm <span>Dinesh Bhairoju</span></h1>
-  <p>AI + Digital Marketing + Ecommerce Specialist</p>
+  <p class="sub">AI + Digital Marketing + Ecommerce Specialist</p>
+  <div class="cta">Explore</div>
 </section>
 
-<!-- CHAT BUTTON -->
-<button id="chatToggle">💬</button>
-
-<!-- CHATBOX -->
-<div id="chatbot">
-  <div id="chat-header">🤖 AI Assistant</div>
-  <div id="chat-body"></div>
-  <input id="chat-input" placeholder="Ask me...">
-</div>
-
-<!-- VOICE -->
-<button id="voiceBtn">🎤</button>
+<button id="voiceBtn" class="btn">🎤</button>
+<button id="chatBtn" class="btn">💬</button>
 
 <script src="https://cdn.jsdelivr.net/npm/three@0.154.0/build/three.min.js"></script>
 
 <script>
-/* FIX EARTH */
-const canvas=document.getElementById("bg");
-const renderer=new THREE.WebGLRenderer({canvas});
-renderer.setSize(innerWidth,innerHeight);
+/* PERFECT 3D FIX */
+const canvas = document.getElementById("bg");
+const renderer = new THREE.WebGLRenderer({canvas, alpha:true});
+renderer.setSize(innerWidth, innerHeight);
 
-const scene=new THREE.Scene();
-const camera=new THREE.PerspectiveCamera(60,innerWidth/innerHeight,0.1,100);
-camera.position.z=5;
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(60, innerWidth/innerHeight, 0.1, 100);
+camera.position.z = 6;
 
-const sphere=new THREE.Mesh(
-  new THREE.SphereGeometry(2,64,64),
+/* SMALLER SPHERE */
+const sphere = new THREE.Mesh(
+  new THREE.SphereGeometry(1.8,64,64),
   new THREE.MeshStandardMaterial({color:0x8a63f9})
 );
+sphere.position.y = 0.5;
 scene.add(sphere);
 
-const light=new THREE.PointLight(0xffffff,1);
+/* LIGHT */
+const light = new THREE.PointLight(0xffffff,1.2);
 light.position.set(5,5,5);
 scene.add(light);
 
+/* ANIMATION */
 function animate(){
   requestAnimationFrame(animate);
-  sphere.rotation.y+=0.01;
-  renderer.render(scene,camera);
+
+  sphere.rotation.y += 0.005;
+  sphere.position.y = Math.sin(Date.now()*0.001)*0.3;
+
+  renderer.render(scene, camera);
 }
 animate();
 
-/* CHAT TOGGLE */
-const toggle=document.getElementById("chatToggle");
-const chat=document.getElementById("chatbot");
-
-toggle.onclick=()=>{
-  chat.style.display = chat.style.display==="flex" ? "none" : "flex";
-};
-
-/* CHAT */
-const input=document.getElementById("chat-input");
-const body=document.getElementById("chat-body");
-
-input.addEventListener("keydown",async(e)=>{
-  if(e.key==="Enter"){
-    const msg=input.value;
-    body.innerHTML+=`<div>👤 ${msg}</div>`;
-    input.value="";
-
-    try{
-      const res=await fetch("https://YOUR-RENDER-URL.onrender.com/chat",{
-        method:"POST",
-        headers:{"Content-Type":"application/json"},
-        body:JSON.stringify({message:msg})
-      });
-
-      const data=await res.json();
-      body.innerHTML+=`<div>🤖 ${data.reply}</div>`;
-    }catch{
-      body.innerHTML+=`<div>⚠️ AI not working</div>`;
-    }
-  }
+/* RESPONSIVE */
+addEventListener("resize",()=>{
+  camera.aspect = innerWidth/innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(innerWidth,innerHeight);
 });
-
-/* VOICE */
-document.getElementById("voiceBtn").onclick=()=>{
-  const rec=new(window.SpeechRecognition||window.webkitSpeechRecognition)();
-  rec.onresult=e=>{
-    input.value=e.results[0][0].transcript;
-    input.dispatchEvent(new KeyboardEvent("keydown",{key:"Enter"}));
-  };
-  rec.start();
-};
 </script>
 
 </body>
