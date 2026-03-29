@@ -40,13 +40,8 @@ header{
   align-items:center;
   text-align:center;
 }
-h1 span{
-  background:linear-gradient(90deg,#fff,var(--accent));
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-}
 
-/* SINGLE AI BUTTON */
+/* AI BUTTON */
 #aiBtn{
   position:fixed;
   bottom:25px;
@@ -56,39 +51,24 @@ h1 span{
   height:70px;
   border-radius:50%;
   border:none;
-  font-size:28px;
   background:linear-gradient(90deg,var(--accent),var(--accent2));
   box-shadow:0 0 30px rgba(155,93,255,.8);
-  cursor:pointer;
-  transition:.3s;
-}
-#aiBtn:hover{
-  transform:translateX(-50%) scale(1.1);
+  color:#fff;
+  font-size:18px;
 }
 
-/* LISTENING ANIMATION */
-.listening{
-  animation:pulse 1s infinite;
-}
-@keyframes pulse{
-  0%{box-shadow:0 0 10px var(--accent)}
-  50%{box-shadow:0 0 50px var(--accent2)}
-  100%{box-shadow:0 0 10px var(--accent)}
-}
-
-/* CHAT BOX */
+/* CHAT */
 #chatbox{
   position:fixed;
   bottom:110px;
   right:20px;
   width:320px;
-  height:420px;
+  height:450px;
   display:none;
   flex-direction:column;
-  background:rgba(0,0,0,.75);
+  background:rgba(0,0,0,.8);
   backdrop-filter:blur(20px);
   border-radius:20px;
-  border:1px solid rgba(255,255,255,.1);
 }
 
 /* HEADER */
@@ -97,7 +77,6 @@ h1 span{
   background:linear-gradient(90deg,var(--accent),var(--accent2));
   display:flex;
   justify-content:space-between;
-  font-weight:600;
 }
 
 /* BODY */
@@ -113,14 +92,23 @@ h1 span{
   border-radius:15px;
   max-width:80%;
 }
+.user{background:#111;margin-left:auto;}
+.bot{background:linear-gradient(90deg,var(--accent),var(--accent2));}
 
-.user{
-  background:#111;
-  margin-left:auto;
+/* SUGGESTIONS */
+.suggestions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px;
+  padding:10px;
 }
-
-.bot{
-  background:linear-gradient(90deg,var(--accent),var(--accent2));
+.suggestions button{
+  background:#111;
+  color:#fff;
+  border:1px solid #333;
+  padding:6px 10px;
+  border-radius:10px;
+  font-size:12px;
 }
 
 /* INPUT */
@@ -136,11 +124,10 @@ h1 span{
   color:#fff;
 }
 #sendBtn{
-  width:55px;
+  width:50px;
   border:none;
-  background:linear-gradient(90deg,var(--accent),var(--accent2));
+  background:var(--accent);
   color:#fff;
-  font-size:18px;
 }
 
 /* BG */
@@ -162,13 +149,11 @@ canvas{
 <canvas id="bg"></canvas>
 
 <section class="hero">
-  <h1>Hi, I'm <span>Dinesh Bhairoju</span></h1>
+  <h1>Hi, I'm Dinesh Bhairoju</h1>
 </section>
 
-<!-- ONLY ONE BUTTON -->
 <button id="aiBtn">AI</button>
 
-<!-- CHAT -->
 <div id="chatbox">
   <div class="chat-header">
     Dinesh AI
@@ -176,6 +161,14 @@ canvas{
   </div>
 
   <div id="chat-body"></div>
+
+  <!-- SUGGESTIONS -->
+  <div class="suggestions">
+    <button onclick="quickMsg('skills')">Skills</button>
+    <button onclick="quickMsg('education')">Education</button>
+    <button onclick="quickMsg('resume')">Resume</button>
+    <button onclick="quickMsg('email')">Email</button>
+  </div>
 
   <div class="chat-input-box">
     <input id="chat-input" placeholder="Ask me anything...">
@@ -218,36 +211,48 @@ const closeChat = document.getElementById("closeChat");
 const input = document.getElementById("chat-input");
 const body = document.getElementById("chat-body");
 
-aiBtn.onclick = ()=>{
-  chatbox.style.display="flex";
-  startVoice(); // voice + chat together
-};
-
+aiBtn.onclick = ()=> chatbox.style.display="flex";
 closeChat.onclick = ()=> chatbox.style.display="none";
 
 /* ADD MESSAGE */
 function addMessage(text, cls){
   const div = document.createElement("div");
   div.className = "msg " + cls;
-  div.innerText = text;
+  div.innerHTML = text;
   body.appendChild(div);
   body.scrollTop = body.scrollHeight;
+}
+
+/* QUICK BUTTON */
+function quickMsg(text){
+  sendMessage(text);
 }
 
 /* AI LOGIC */
 function reply(msg){
   msg = msg.toLowerCase();
 
-  if(msg.includes("hi")) return "Hello. How can I help you?";
-  if(msg.includes("skills")) return "Dinesh works in AI, Digital Marketing, and Ecommerce.";
-  if(msg.includes("who")) return "Dinesh Bhairoju is an AI-focused digital specialist.";
+  if(msg.includes("skills"))
+    return "Skills:<br>AI, Digital Marketing, Ecommerce, Web Development";
+
+  if(msg.includes("education"))
+    return "Education:<br>Bachelor's Degree (update with your details)";
+
+  if(msg.includes("resume"))
+    return 'Download Resume:<br><a href="resume.pdf" target="_blank" style="color:#fff;">Open Resume</a>';
+
+  if(msg.includes("email"))
+    return 'Contact Email:<br><a href="mailto:your@email.com" style="color:#fff;">your@email.com</a>';
+
+  if(msg.includes("hi"))
+    return "Hello. How can I help you?";
 
   return "Please tell me more.";
 }
 
 /* SEND */
-function sendMessage(){
-  const msg = input.value;
+function sendMessage(msgInput){
+  const msg = msgInput || input.value;
   if(!msg) return;
 
   addMessage(msg,"user");
@@ -256,39 +261,15 @@ function sendMessage(){
   setTimeout(()=>{
     const res = reply(msg);
     addMessage(res,"bot");
-    speak(res);
+    speak(res.replace(/<[^>]*>/g, ""));
   },400);
 }
 
-document.getElementById("sendBtn").onclick = sendMessage;
+document.getElementById("sendBtn").onclick = ()=> sendMessage();
+
 input.addEventListener("keydown",(e)=>{
   if(e.key==="Enter") sendMessage();
 });
-
-/* VOICE */
-function startVoice(){
-  const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
-
-  aiBtn.classList.add("listening");
-
-  recognition.onresult = (e)=>{
-    const text = e.results[0][0].transcript;
-
-    addMessage(text,"user");
-
-    const res = reply(text);
-    addMessage(res,"bot");
-    speak(res);
-
-    aiBtn.classList.remove("listening");
-  };
-
-  recognition.onerror = ()=>{
-    aiBtn.classList.remove("listening");
-  };
-
-  recognition.start();
-}
 
 /* SPEAK */
 function speak(text){
