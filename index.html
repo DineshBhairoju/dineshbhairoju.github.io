@@ -54,12 +54,6 @@ h1 span{
   -webkit-text-fill-color:transparent;
 }
 .sub{color:#ccc;margin:15px 0}
-.cta{
-  padding:14px 30px;
-  border-radius:40px;
-  background:linear-gradient(90deg,var(--accent),var(--accent2));
-  box-shadow:0 0 25px rgba(155,93,255,.5);
-}
 
 /* BUTTONS */
 .btn{
@@ -81,7 +75,7 @@ h1 span{
 #voiceBtn{left:20px;bottom:20px;}
 #chatBtn{right:20px;bottom:20px;}
 
-/* CHATBOX */
+/* CHAT */
 #chatbox{
   position:fixed;
   bottom:100px;
@@ -95,16 +89,15 @@ h1 span{
   border-radius:20px;
   border:1px solid rgba(255,255,255,.2);
   overflow:hidden;
-  z-index:20;
 }
 
 /* HEADER */
 .chat-header{
   padding:12px;
   background:linear-gradient(90deg,var(--accent),var(--accent2));
+  font-weight:600;
   display:flex;
   justify-content:space-between;
-  font-weight:600;
 }
 
 /* BODY */
@@ -115,13 +108,12 @@ h1 span{
   font-size:14px;
 }
 
-/* MESSAGES */
 .msg{
+  margin:8px 0;
   padding:10px 14px;
-  border-radius:16px;
-  margin:6px 0;
+  border-radius:15px;
   max-width:80%;
-  line-height:1.4;
+  animation:fade .3s ease;
 }
 
 .user{
@@ -133,6 +125,26 @@ h1 span{
   background:linear-gradient(90deg,var(--accent),var(--accent2));
 }
 
+/* typing dots */
+.typing{
+  display:inline-block;
+}
+.typing span{
+  animation:blink 1.4s infinite;
+}
+.typing span:nth-child(2){animation-delay:.2s}
+.typing span:nth-child(3){animation-delay:.4s}
+
+@keyframes blink{
+  0%,80%,100%{opacity:0}
+  40%{opacity:1}
+}
+
+@keyframes fade{
+  from{opacity:0;transform:translateY(10px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
 /* INPUT */
 #chat-input{
   padding:12px;
@@ -142,7 +154,7 @@ h1 span{
   outline:none;
 }
 
-/* CANVAS */
+/* BG */
 canvas{
   position:fixed;
   top:0;
@@ -163,7 +175,6 @@ canvas{
 <section class="hero">
   <h1>Hi, I'm <span>Dinesh Bhairoju</span></h1>
   <p class="sub">AI + Digital Marketing + Ecommerce Specialist</p>
-  <div class="cta">Explore</div>
 </section>
 
 <button id="voiceBtn" class="btn">🎤</button>
@@ -172,7 +183,7 @@ canvas{
 <div id="chatbox">
   <div class="chat-header">
     🤖 Dinesh AI
-    <span id="closeChat" style="cursor:pointer">✖</span>
+    <span id="closeChat">✖</span>
   </div>
   <div id="chat-body"></div>
   <input id="chat-input" placeholder="Ask me anything...">
@@ -181,7 +192,7 @@ canvas{
 <script src="https://cdn.jsdelivr.net/npm/three@0.154.0/build/three.min.js"></script>
 
 <script>
-/* 3D BACKGROUND */
+/* ===== 3D ===== */
 const renderer = new THREE.WebGLRenderer({canvas:bg, alpha:true});
 renderer.setSize(innerWidth, innerHeight);
 
@@ -207,143 +218,119 @@ function animate(){
 }
 animate();
 
-/* CHAT SYSTEM */
+/* ===== CHAT ===== */
 const chatBtn = document.getElementById("chatBtn");
 const chatbox = document.getElementById("chatbox");
 const closeChat = document.getElementById("closeChat");
 const input = document.getElementById("chat-input");
 const body = document.getElementById("chat-body");
 
-let memory = [];
-
-/* OPEN CHAT + AUTO INTRO */
-chatBtn.onclick = ()=>{
-  chatbox.style.display="flex";
-
-  if(!chatbox.dataset.opened){
-    chatbox.dataset.opened = true;
-
-    setTimeout(()=>{
-      const botDiv = document.createElement("div");
-      botDiv.className="msg bot";
-      body.appendChild(botDiv);
-
-      const intro = "Hey 👋 I'm Dinesh Bhairoju's AI assistant.\nI can help you explore skills, projects, and ideas 🚀";
-
-      typeEffect(botDiv, intro);
-      speak(intro);
-
-      memory.push({type:"bot", text:intro});
-    },400);
-  }
-};
-
+chatBtn.onclick = ()=> chatbox.style.display="flex";
 closeChat.onclick = ()=> chatbox.style.display="none";
 
-/* ADD MESSAGE */
-function addMsg(text,type){
+/* ===== MEMORY ===== */
+let history = JSON.parse(localStorage.getItem("chatHistory")) || [];
+
+function saveMemory(){
+  localStorage.setItem("chatHistory", JSON.stringify(history));
+}
+
+/* ===== TYPE EFFECT ===== */
+function typeEffect(el, text){
+  let i = 0;
+  el.innerHTML = "";
+
+  const interval = setInterval(()=>{
+    const char = text[i];
+    if(char === "\n") el.innerHTML += "<br>";
+    else el.innerHTML += char;
+
+    i++;
+    if(i >= text.length) clearInterval(interval);
+  }, 15);
+}
+
+/* ===== ADD MESSAGE ===== */
+function addMessage(text, cls, typing=false){
   const div = document.createElement("div");
-  div.className = "msg " + type;
-  div.innerText = text;
+  div.className = "msg " + cls;
+
+  if(typing){
+    div.innerHTML = '<div class="typing"><span>.</span><span>.</span><span>.</span></div>';
+  }else{
+    typeEffect(div, text);
+  }
+
   body.appendChild(div);
   body.scrollTop = body.scrollHeight;
+  return div;
 }
 
-/* TYPING EFFECT */
-function typeEffect(el,text){
-  let i=0;
-  el.innerText="";
-  const interval = setInterval(()=>{
-    el.innerText += text[i];
-    i++;
-    if(i>=text.length) clearInterval(interval);
-  },18);
-}
+/* ===== FAKE AI (FREE) ===== */
+function smartReply(msg){
+  msg = msg.toLowerCase();
 
-/* SMART AI */
-function smartReply(text){
-  text = text.toLowerCase();
+  if(msg.includes("who") || msg.includes("dinesh"))
+    return "Dinesh Bhairoju is an AI + Digital Marketing + Ecommerce Specialist 🚀";
 
-  if(text.includes("hi") || text.includes("hello"))
-    return "Hey again 👋 how can I help you today?";
+  if(msg.includes("hi") || msg.includes("hello"))
+    return "Hey 👋 How can I help you today?";
 
-  if(text.includes("who are you"))
-    return "I'm Dinesh Bhairoju's AI assistant built into this portfolio 🚀";
-
-  if(text.includes("dinesh"))
-    return "Dinesh Bhairoju is an AI, Ecommerce, and Digital Marketing specialist 💡";
-
-  if(text.includes("skills"))
-    return "SEO, Ads, Ecommerce scaling, and AI automation 🔥";
-
-  if(text.includes("how are you"))
-    return "I'm doing great 😄 what about you?";
-
-  if(memory.length > 3)
-    return "Interesting 👀 tell me more about that!";
+  if(msg.includes("skills"))
+    return "I can help with AI, marketing, websites, and automation 💡";
 
   return "That's interesting 👀 tell me more!";
 }
 
-/* SEND MESSAGE */
+/* ===== SEND ===== */
+async function sendMessage(msg){
+  if(!msg) return;
+
+  addMessage(msg, "user");
+  history.push({role:"user",msg});
+  saveMemory();
+
+  const typing = addMessage("", "bot", true);
+
+  setTimeout(()=>{
+    const reply = smartReply(msg);
+    typing.remove();
+
+    const botMsg = addMessage(reply, "bot");
+    history.push({role:"bot",msg:reply});
+    saveMemory();
+
+    speak(reply);
+
+  },1000);
+}
+
 input.addEventListener("keydown",(e)=>{
   if(e.key==="Enter"){
-    const text = input.value.trim();
-    if(!text) return;
-
-    addMsg(text,"user");
-    memory.push({type:"user", text});
+    sendMessage(input.value);
     input.value="";
-
-    const typing = document.createElement("div");
-    typing.className="msg bot";
-    typing.innerText="Typing...";
-    body.appendChild(typing);
-
-    setTimeout(()=>{
-      typing.remove();
-
-      const reply = smartReply(text);
-
-      const botDiv = document.createElement("div");
-      botDiv.className="msg bot";
-      body.appendChild(botDiv);
-
-      typeEffect(botDiv, reply);
-      speak(reply);
-
-      memory.push({type:"bot", text:reply});
-    },700);
   }
 });
 
-/* VOICE OUTPUT */
+/* ===== VOICE ===== */
 function speak(text){
   const speech = new SpeechSynthesisUtterance(text);
-  speech.lang="en-US";
+  speech.rate = 1;
   speechSynthesis.speak(speech);
 }
 
-/* VOICE INPUT */
 document.getElementById("voiceBtn").onclick = ()=>{
   const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
-
-  recognition.onresult = (event)=>{
-    const text = event.results[0][0].transcript;
-
-    addMsg(text,"user");
-
-    const reply = smartReply(text);
-
-    const botDiv = document.createElement("div");
-    botDiv.className="msg bot";
-    body.appendChild(botDiv);
-
-    typeEffect(botDiv, reply);
-    speak(reply);
+  recognition.onresult = (e)=>{
+    sendMessage(e.results[0][0].transcript);
   };
-
   recognition.start();
+};
+
+/* ===== INTRO ===== */
+window.onload = ()=>{
+  const intro = "Hey 👋\nI'm Dinesh Bhairoju's AI assistant.\nI can help you explore skills, projects, and ideas 🚀";
+  addMessage(intro, "bot");
 };
 </script>
 
