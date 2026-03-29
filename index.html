@@ -204,7 +204,7 @@ async function sendMessage(msg){
   body.innerHTML += `<div class="user">👤 ${msg}</div>`;
 
   try{
-    const res = await fetch("https://YOUR-RENDER-URL.onrender.com/chat", {
+    const res = await fetch("https://ai-backend-l562.onrender.com/chat", {
       method:"POST",
       headers:{"Content-Type":"application/json"},
       body: JSON.stringify({message: msg})
