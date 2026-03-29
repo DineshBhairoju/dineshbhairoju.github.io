@@ -96,7 +96,6 @@ h1 span{
   border:1px solid rgba(255,255,255,.2);
   overflow:hidden;
   z-index:20;
-  animation:fadeIn .3s ease;
 }
 
 /* HEADER */
@@ -105,6 +104,7 @@ h1 span{
   background:linear-gradient(90deg,var(--accent),var(--accent2));
   display:flex;
   justify-content:space-between;
+  font-weight:600;
 }
 
 /* BODY */
@@ -121,7 +121,7 @@ h1 span{
   border-radius:16px;
   margin:6px 0;
   max-width:80%;
-  transition:.3s;
+  line-height:1.4;
 }
 
 .user{
@@ -133,11 +133,6 @@ h1 span{
   background:linear-gradient(90deg,var(--accent),var(--accent2));
 }
 
-.msg:hover{
-  transform:scale(1.05);
-  box-shadow:0 0 20px rgba(155,93,255,.6);
-}
-
 /* INPUT */
 #chat-input{
   padding:12px;
@@ -145,12 +140,6 @@ h1 span{
   background:#000;
   color:#fff;
   outline:none;
-}
-
-/* ANIMATION */
-@keyframes fadeIn{
-  from{opacity:0; transform:translateY(20px);}
-  to{opacity:1; transform:translateY(0);}
 }
 
 /* CANVAS */
@@ -182,7 +171,7 @@ canvas{
 
 <div id="chatbox">
   <div class="chat-header">
-    🤖 Assistant
+    🤖 Dinesh AI
     <span id="closeChat" style="cursor:pointer">✖</span>
   </div>
   <div id="chat-body"></div>
@@ -192,7 +181,7 @@ canvas{
 <script src="https://cdn.jsdelivr.net/npm/three@0.154.0/build/three.min.js"></script>
 
 <script>
-/* ===== 3D ===== */
+/* 3D BACKGROUND */
 const renderer = new THREE.WebGLRenderer({canvas:bg, alpha:true});
 renderer.setSize(innerWidth, innerHeight);
 
@@ -218,18 +207,40 @@ function animate(){
 }
 animate();
 
-/* ===== CHAT ===== */
+/* CHAT SYSTEM */
 const chatBtn = document.getElementById("chatBtn");
 const chatbox = document.getElementById("chatbox");
 const closeChat = document.getElementById("closeChat");
 const input = document.getElementById("chat-input");
 const body = document.getElementById("chat-body");
 
-chatBtn.onclick = ()=> chatbox.style.display="flex";
-closeChat.onclick = ()=> chatbox.style.display="none";
-
 let memory = [];
 
+/* OPEN CHAT + AUTO INTRO */
+chatBtn.onclick = ()=>{
+  chatbox.style.display="flex";
+
+  if(!chatbox.dataset.opened){
+    chatbox.dataset.opened = true;
+
+    setTimeout(()=>{
+      const botDiv = document.createElement("div");
+      botDiv.className="msg bot";
+      body.appendChild(botDiv);
+
+      const intro = "Hey 👋 I'm Dinesh Bhairoju's AI assistant.\nI can help you explore skills, projects, and ideas 🚀";
+
+      typeEffect(botDiv, intro);
+      speak(intro);
+
+      memory.push({type:"bot", text:intro});
+    },400);
+  }
+};
+
+closeChat.onclick = ()=> chatbox.style.display="none";
+
+/* ADD MESSAGE */
 function addMsg(text,type){
   const div = document.createElement("div");
   div.className = "msg " + type;
@@ -238,37 +249,50 @@ function addMsg(text,type){
   body.scrollTop = body.scrollHeight;
 }
 
-function typeEffect(element,text){
+/* TYPING EFFECT */
+function typeEffect(el,text){
   let i=0;
+  el.innerText="";
   const interval = setInterval(()=>{
-    element.innerText += text.charAt(i);
+    el.innerText += text[i];
     i++;
     if(i>=text.length) clearInterval(interval);
-  },20);
+  },18);
 }
 
+/* SMART AI */
 function smartReply(text){
   text = text.toLowerCase();
 
-  if(text.includes("hi")) return "Hey 👋 I'm Dinesh's AI assistant!";
-  if(text.includes("who are you")) return "I'm a smart AI assistant built into this portfolio 🚀";
-  if(text.includes("dinesh")) return "Dinesh Bhairoju is an AI + Ecommerce + Digital Marketing specialist 💡";
-  if(text.includes("skills")) return "SEO, Ads, Ecommerce scaling, and AI automation 🔥";
+  if(text.includes("hi") || text.includes("hello"))
+    return "Hey again 👋 how can I help you today?";
 
-  if(memory.length > 2){
-    return "I see you're interested 👀 tell me more!";
-  }
+  if(text.includes("who are you"))
+    return "I'm Dinesh Bhairoju's AI assistant built into this portfolio 🚀";
+
+  if(text.includes("dinesh"))
+    return "Dinesh Bhairoju is an AI, Ecommerce, and Digital Marketing specialist 💡";
+
+  if(text.includes("skills"))
+    return "SEO, Ads, Ecommerce scaling, and AI automation 🔥";
+
+  if(text.includes("how are you"))
+    return "I'm doing great 😄 what about you?";
+
+  if(memory.length > 3)
+    return "Interesting 👀 tell me more about that!";
 
   return "That's interesting 👀 tell me more!";
 }
 
+/* SEND MESSAGE */
 input.addEventListener("keydown",(e)=>{
   if(e.key==="Enter"){
-    const text = input.value;
+    const text = input.value.trim();
     if(!text) return;
 
     addMsg(text,"user");
-    memory.push(text);
+    memory.push({type:"user", text});
     input.value="";
 
     const typing = document.createElement("div");
@@ -288,24 +312,25 @@ input.addEventListener("keydown",(e)=>{
       typeEffect(botDiv, reply);
       speak(reply);
 
-      memory.push(reply);
-    },800);
+      memory.push({type:"bot", text:reply});
+    },700);
   }
 });
 
-/* ===== VOICE ===== */
+/* VOICE OUTPUT */
 function speak(text){
   const speech = new SpeechSynthesisUtterance(text);
-  speech.rate = 1;
-  speech.pitch = 1;
+  speech.lang="en-US";
   speechSynthesis.speak(speech);
 }
 
+/* VOICE INPUT */
 document.getElementById("voiceBtn").onclick = ()=>{
   const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
 
   recognition.onresult = (event)=>{
     const text = event.results[0][0].transcript;
+
     addMsg(text,"user");
 
     const reply = smartReply(text);
