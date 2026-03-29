@@ -29,15 +29,11 @@ header{
   padding:20px 30px;
   display:flex;
   justify-content:space-between;
-  align-items:center;
   background:rgba(0,0,0,.5);
   backdrop-filter:blur(10px);
   z-index:10;
 }
-.logo{
-  font-weight:800;
-  font-size:22px;
-}
+.logo{font-weight:800;font-size:22px;}
 .logo span{color:var(--accent)}
 
 /* HERO */
@@ -48,36 +44,21 @@ header{
   justify-content:center;
   align-items:center;
   text-align:center;
-  padding:0 20px;
 }
-
 h1{
-  font-size:clamp(32px,6vw,64px);
-  margin-bottom:10px;
+  font-size:clamp(32px,6vw,60px);
 }
 h1 span{
   background:linear-gradient(90deg,#fff,var(--accent));
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
 }
-
-.sub{
-  color:#ccc;
-  margin-bottom:25px;
-  max-width:500px;
-}
-
-/* BUTTON */
+.sub{color:#ccc;margin:15px 0}
 .cta{
   padding:14px 30px;
   border-radius:40px;
   background:linear-gradient(90deg,var(--accent),var(--accent2));
   box-shadow:0 0 25px rgba(155,93,255,.5);
-  cursor:pointer;
-  transition:.3s;
-}
-.cta:hover{
-  transform:scale(1.05);
 }
 
 /* FLOAT BUTTONS */
@@ -90,9 +71,55 @@ h1 span{
   font-size:22px;
   background:linear-gradient(90deg,var(--accent),var(--accent2));
   box-shadow:0 0 25px rgba(155,93,255,.8);
+  cursor:pointer;
 }
 #voiceBtn{left:20px;bottom:20px;}
 #chatBtn{right:20px;bottom:20px;}
+
+/* CHAT POPUP */
+#chatbox{
+  position:fixed;
+  bottom:100px;
+  right:20px;
+  width:320px;
+  height:420px;
+  display:none;
+  flex-direction:column;
+  background:rgba(0,0,0,.7);
+  backdrop-filter:blur(20px);
+  border-radius:20px;
+  border:1px solid rgba(255,255,255,.2);
+  overflow:hidden;
+  z-index:20;
+}
+
+/* CHAT HEADER */
+.chat-header{
+  padding:12px;
+  background:linear-gradient(90deg,var(--accent),var(--accent2));
+  font-weight:600;
+  display:flex;
+  justify-content:space-between;
+}
+
+/* CHAT BODY */
+#chat-body{
+  flex:1;
+  overflow-y:auto;
+  padding:10px;
+  font-size:14px;
+}
+.user{color:#ccc;margin:6px 0;}
+.bot{color:#9b5dff;margin:6px 0;}
+
+/* INPUT */
+#chat-input{
+  padding:12px;
+  border:none;
+  background:#000;
+  color:#fff;
+  outline:none;
+}
 
 /* CANVAS */
 canvas{
@@ -118,51 +145,108 @@ canvas{
   <div class="cta">Explore</div>
 </section>
 
+<!-- BUTTONS -->
 <button id="voiceBtn" class="btn">🎤</button>
 <button id="chatBtn" class="btn">💬</button>
+
+<!-- CHATBOX -->
+<div id="chatbox">
+  <div class="chat-header">
+    🤖 Assistant
+    <span id="closeChat" style="cursor:pointer">✖</span>
+  </div>
+  <div id="chat-body"></div>
+  <input id="chat-input" placeholder="Ask me anything...">
+</div>
 
 <script src="https://cdn.jsdelivr.net/npm/three@0.154.0/build/three.min.js"></script>
 
 <script>
-/* PERFECT 3D FIX */
-const canvas = document.getElementById("bg");
-const renderer = new THREE.WebGLRenderer({canvas, alpha:true});
+/* ===== 3D ===== */
+const renderer = new THREE.WebGLRenderer({canvas:bg, alpha:true});
 renderer.setSize(innerWidth, innerHeight);
 
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(60, innerWidth/innerHeight, 0.1, 100);
 camera.position.z = 6;
 
-/* SMALLER SPHERE */
 const sphere = new THREE.Mesh(
   new THREE.SphereGeometry(1.8,64,64),
   new THREE.MeshStandardMaterial({color:0x8a63f9})
 );
-sphere.position.y = 0.5;
 scene.add(sphere);
 
-/* LIGHT */
 const light = new THREE.PointLight(0xffffff,1.2);
 light.position.set(5,5,5);
 scene.add(light);
 
-/* ANIMATION */
 function animate(){
   requestAnimationFrame(animate);
-
   sphere.rotation.y += 0.005;
   sphere.position.y = Math.sin(Date.now()*0.001)*0.3;
-
   renderer.render(scene, camera);
 }
 animate();
 
-/* RESPONSIVE */
-addEventListener("resize",()=>{
-  camera.aspect = innerWidth/innerHeight;
-  camera.updateProjectionMatrix();
-  renderer.setSize(innerWidth,innerHeight);
+/* ===== CHAT TOGGLE ===== */
+const chatBtn = document.getElementById("chatBtn");
+const chatbox = document.getElementById("chatbox");
+const closeChat = document.getElementById("closeChat");
+
+chatBtn.onclick = ()=> chatbox.style.display="flex";
+closeChat.onclick = ()=> chatbox.style.display="none";
+
+/* ===== AI CHAT ===== */
+const input = document.getElementById("chat-input");
+const body = document.getElementById("chat-body");
+
+async function sendMessage(msg){
+  body.innerHTML += `<div class="user">👤 ${msg}</div>`;
+
+  try{
+    const res = await fetch("https://YOUR-RENDER-URL.onrender.com/chat", {
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body: JSON.stringify({message: msg})
+    });
+
+    const data = await res.json();
+
+    body.innerHTML += `<div class="bot">🤖 ${data.reply}</div>`;
+    speak(data.reply);
+
+  }catch{
+    body.innerHTML += `<div class="bot">⚠️ AI not connected</div>`;
+  }
+
+  body.scrollTop = body.scrollHeight;
+}
+
+input.addEventListener("keydown",(e)=>{
+  if(e.key==="Enter"){
+    sendMessage(input.value);
+    input.value="";
+  }
 });
+
+/* ===== VOICE ===== */
+function speak(text){
+  const speech = new SpeechSynthesisUtterance(text);
+  speech.rate = 1;
+  speech.pitch = 1;
+  speechSynthesis.speak(speech);
+}
+
+document.getElementById("voiceBtn").onclick = ()=>{
+  const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+
+  recognition.onresult = (event)=>{
+    const text = event.results[0][0].transcript;
+    sendMessage(text);
+  };
+
+  recognition.start();
+};
 </script>
 
 </body>
