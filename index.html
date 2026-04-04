@@ -1,170 +1,107 @@
-import { Canvas } from "@react-three/fiber";
-import { Float, OrbitControls } from "@react-three/drei";
-import { motion } from "framer-motion";
-import { useState } from "react";
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Your Name | Portfolio</title>
 
-/* 3D SHAPE */
-function FloatingShape() {
-  return (
-    <Float speed={2} rotationIntensity={2} floatIntensity={2}>
-      <mesh>
-        <torusKnotGeometry args={[1, 0.3, 128, 32]} />
-        <meshStandardMaterial color="#00f0ff" wireframe />
-      </mesh>
-    </Float>
-  );
-}
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
 
-export default function App() {
-  const [msg, setMsg] = useState("");
-  const [chat, setChat] = useState([]);
+  <style>
+    body {
+      background: #0f172a;
+      color: white;
+      scroll-behavior: smooth;
+    }
+  </style>
+</head>
 
-  const handleSend = () => {
-    if (!msg) return;
-    setChat([...chat, { user: msg, bot: "🤖 AI response coming soon..." }]);
-    setMsg("");
-  };
+<body>
 
-  return (
-    <div className="bg-black text-white font-sans">
+  <!-- NAVBAR -->
+  <nav class="fixed top-0 w-full bg-black/50 backdrop-blur p-4 flex justify-between">
+    <h1 class="text-cyan-400 font-bold">YourName</h1>
+    <div class="space-x-4">
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </nav>
 
-      {/* NAVBAR */}
-      <nav className="fixed top-0 w-full backdrop-blur-lg bg-white/10 p-4 z-50 flex justify-between">
-        <h1 className="text-cyan-400 font-bold text-lg">YourName</h1>
-        <div className="space-x-4">
-          <a href="#projects">Projects</a>
-          <a href="#contact">Contact</a>
-        </div>
-      </nav>
+  <!-- HERO -->
+  <section class="h-screen flex flex-col justify-center items-center text-center px-4">
+    <img src="profile.png" class="w-32 h-32 rounded-full border-4 border-cyan-400 mb-4"/>
 
-      {/* HERO */}
-      <section className="h-screen flex flex-col justify-center items-center text-center relative">
-        
-        {/* PROFILE */}
-        <div className="w-40 h-40 rounded-full overflow-hidden border-4 border-cyan-400 shadow-[0_0_40px_#00f0ff]">
-          <img src="/profile.png" alt="profile" />
-        </div>
+    <h1 class="text-4xl font-bold">Your Name</h1>
+    <p class="text-cyan-400 mt-2">Full Stack Developer</p>
 
-        <h1 className="text-5xl mt-4 font-bold">Your Name</h1>
-        <p className="text-cyan-400 mt-2">
-          Full Stack Developer | AI Enthusiast
-        </p>
+    <div class="mt-6 space-x-4">
+      <a href="#projects" class="bg-cyan-400 text-black px-4 py-2 rounded">Projects</a>
+      <a href="resume.pdf" download class="border border-cyan-400 px-4 py-2 rounded">Download Resume</a>
+    </div>
+  </section>
 
-        <div className="mt-6 space-x-4">
-          <a href="#projects" className="px-4 py-2 bg-cyan-400 text-black rounded">
-            View Projects
-          </a>
-          <a href="/resume.pdf" download className="px-4 py-2 border border-cyan-400 rounded">
-            Download Resume
-          </a>
-        </div>
+  <!-- ABOUT -->
+  <section class="p-10 text-center max-w-3xl mx-auto">
+    <h2 class="text-2xl text-cyan-400">About Me</h2>
+    <p class="mt-4 text-gray-300">
+      I am a passionate developer building modern and responsive websites.
+    </p>
+  </section>
 
-        {/* 3D BACKGROUND */}
-        <div className="absolute inset-0 -z-10">
-          <Canvas camera={{ position: [0, 0, 5] }}>
-            <ambientLight />
-            <FloatingShape />
-            <OrbitControls enableZoom={false} />
-          </Canvas>
-        </div>
-      </section>
+  <!-- SKILLS -->
+  <section class="p-10 text-center">
+    <h2 class="text-2xl text-cyan-400">Skills</h2>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6">
+      <div class="bg-white/10 p-4 rounded">HTML</div>
+      <div class="bg-white/10 p-4 rounded">CSS</div>
+      <div class="bg-white/10 p-4 rounded">JavaScript</div>
+      <div class="bg-white/10 p-4 rounded">React</div>
+    </div>
+  </section>
 
-      {/* ABOUT */}
-      <section className="p-10 max-w-4xl mx-auto text-center">
-        <h2 className="text-3xl text-cyan-400">About Me</h2>
-        <p className="mt-4 text-gray-300">
-          I build futuristic web apps with AI integration, 3D experiences, and smooth animations.
-        </p>
-      </section>
+  <!-- PROJECTS -->
+  <section id="projects" class="p-10 text-center">
+    <h2 class="text-2xl text-cyan-400">Projects</h2>
+    <div class="grid md:grid-cols-3 gap-6 mt-6">
+      
+      <div class="bg-white/10 p-4 rounded">
+        <h3 class="font-bold">Project 1</h3>
+        <p class="text-gray-400">Project description</p>
+      </div>
 
-      {/* SKILLS */}
-      <section className="p-10">
-        <h2 className="text-3xl text-cyan-400 text-center">Skills</h2>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-6">
-          {["React", "Node.js", "AI APIs", "Three.js"].map((skill, i) => (
-            <motion.div
-              key={i}
-              whileHover={{ scale: 1.1 }}
-              className="p-4 bg-white/10 backdrop-blur rounded-xl text-center"
-            >
-              {skill}
-            </motion.div>
-          ))}
-        </div>
-      </section>
+      <div class="bg-white/10 p-4 rounded">
+        <h3 class="font-bold">Project 2</h3>
+        <p class="text-gray-400">Project description</p>
+      </div>
 
-      {/* PROJECTS */}
-      <section id="projects" className="p-10">
-        <h2 className="text-3xl text-cyan-400 text-center">Projects</h2>
-        <div className="grid md:grid-cols-3 gap-6 mt-6">
-          {[1, 2, 3].map((i) => (
-            <motion.div
-              key={i}
-              whileHover={{ scale: 1.05, rotateY: 5 }}
-              className="p-6 bg-white/10 backdrop-blur rounded-xl"
-            >
-              <h3 className="font-bold text-lg">Project {i}</h3>
-              <p className="text-gray-400 mt-2">Modern app with AI + 3D</p>
-            </motion.div>
-          ))}
-        </div>
-      </section>
-
-      {/* AI CHAT SECTION */}
-      <section className="p-10 max-w-xl mx-auto">
-        <h2 className="text-3xl text-cyan-400 text-center">AI Assistant</h2>
-
-        <div className="bg-white/10 p-4 rounded-lg mt-4 h-60 overflow-y-auto">
-          {chat.map((c, i) => (
-            <div key={i} className="mb-2">
-              <p>🧑 {c.user}</p>
-              <p className="text-cyan-400">🤖 {c.bot}</p>
-            </div>
-          ))}
-        </div>
-
-        <div className="flex mt-4 gap-2">
-          <input
-            value={msg}
-            onChange={(e) => setMsg(e.target.value)}
-            placeholder="Ask something..."
-            className="flex-1 p-2 bg-white/10"
-          />
-          <button onClick={handleSend} className="bg-cyan-400 text-black px-4">
-            Send
-          </button>
-        </div>
-      </section>
-
-      {/* CONTACT */}
-      <section id="contact" className="p-10">
-        <h2 className="text-3xl text-cyan-400 text-center">Contact</h2>
-        <form className="flex flex-col gap-4 max-w-md mx-auto mt-6">
-          <input placeholder="Name" className="p-2 bg-white/10" />
-          <input placeholder="Email" className="p-2 bg-white/10" />
-          <textarea placeholder="Message" className="p-2 bg-white/10" />
-          <button className="bg-cyan-400 text-black p-2">Send</button>
-        </form>
-      </section>
-
-      {/* FOOTER */}
-      <footer className="p-6 mt-10 bg-white/5 backdrop-blur text-center">
-        <motion.p
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 1 }}
-          className="text-gray-400"
-        >
-          © 2026 Your Name • Built with React + AI + 3D
-        </motion.p>
-
-        <div className="flex justify-center gap-4 mt-4">
-          <a href="#" className="hover:text-cyan-400">GitHub</a>
-          <a href="#" className="hover:text-cyan-400">LinkedIn</a>
-          <a href="#" className="hover:text-cyan-400">Email</a>
-        </div>
-      </footer>
+      <div class="bg-white/10 p-4 rounded">
+        <h3 class="font-bold">Project 3</h3>
+        <p class="text-gray-400">Project description</p>
+      </div>
 
     </div>
-  );
-}
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="p-10 text-center">
+    <h2 class="text-2xl text-cyan-400">Contact</h2>
+    <form class="max-w-md mx-auto mt-6 flex flex-col gap-4">
+      <input type="text" placeholder="Name" class="p-2 bg-white/10 rounded"/>
+      <input type="email" placeholder="Email" class="p-2 bg-white/10 rounded"/>
+      <textarea placeholder="Message" class="p-2 bg-white/10 rounded"></textarea>
+      <button class="bg-cyan-400 text-black p-2 rounded">Send</button>
+    </form>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="p-6 text-center bg-black/40 mt-10">
+    <p class="text-gray-400">© 2026 Your Name</p>
+    <div class="mt-2 space-x-4">
+      <a href="#">GitHub</a>
+      <a href="#">LinkedIn</a>
+    </div>
+  </footer>
+
+</body>
+</html>
